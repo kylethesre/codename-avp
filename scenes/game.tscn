@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://d2icr4n13hemv"]
 
+[ext_resource type="PackedScene" uid="uid://bq46cdiwnuxe5" path="res://scenes/background.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dtf5v77dx3dvt" path="res://scenes/character.tscn" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://cv1vbvnynxjgt" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01.png" id="2_p57ef"]
 [ext_resource type="AudioStream" uid="uid://b1f4rai8klm28" path="res://music/Placeholder_music.mp3" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/bear.tscn" id="3_lnu2h"]
 
@@ -8,6 +10,11 @@
 distance = -190.0
 
 [node name="Node2D" type="Node2D" unique_id=2053608586]
+
+[node name="Background" parent="." unique_id=575990805 instance=ExtResource("1_iywne")]
+position = Vector2(22, -15)
+scale = Vector2(5.3624997, 4.175)
+texture = ExtResource("2_p57ef")
 
 [node name="CharacterBody2D" parent="." unique_id=1662778846 instance=ExtResource("2_lnu2h")]
 position = Vector2(22, 6)
