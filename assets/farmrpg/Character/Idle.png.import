@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do13i1f6cvu68"
-path="res://.godot/imported/game_character.png-75ed0949dfc210e8205135a2407609e1.ctex"
+uid="uid://bq7ivhinkqhl7"
+path="res://.godot/imported/Idle.png-56148bc46a309b535f545ccd0846d070.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game_character.png"
-dest_files=["res://.godot/imported/game_character.png-75ed0949dfc210e8205135a2407609e1.ctex"]
+source_file="res://assets/farmrpg/Character/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-56148bc46a309b535f545ccd0846d070.ctex"]
 
 [params]
 

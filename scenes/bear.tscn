@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dtbc0eheowrlr"]
+
+[ext_resource type="Texture2D" uid="uid://uhdmdecpvy2" path="res://assets/retrorpg/Bear.png" id="1_a3xf0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aquv5"]
+atlas = ExtResource("1_a3xf0")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0uag"]
+atlas = ExtResource("1_a3xf0")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5djg"]
+atlas = ExtResource("1_a3xf0")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7gg4"]
+atlas = ExtResource("1_a3xf0")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4uyl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aquv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0uag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5djg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7gg4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0f2y1"]
+radius = 8.062258
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=188171215]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=363962474]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_r4uyl")
+frame_progress = 0.091955975
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1403301060]
+shape = SubResource("CircleShape2D_0f2y1")
