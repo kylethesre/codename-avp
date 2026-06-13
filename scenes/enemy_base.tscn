@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dowj5c2jmpn7k"]
+
+[ext_resource type="Script" uid="uid://b2cbd8wrsk222" path="res://scripts/enemy_base.gd" id="1_sw0xa"]
+[ext_resource type="Texture2D" uid="uid://cxn8qjwpdyxe7" path="res://assets/yikes.png" id="2_j1ss0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vv3x1"]
+
+[node name="EnemyBase" type="CharacterBody2D" unique_id=1030623349]
+script = ExtResource("1_sw0xa")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=391370511]
+texture = ExtResource("2_j1ss0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=180961597]
+shape = SubResource("CircleShape2D_vv3x1")
