@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/bear.tscn" id="3_lnu2h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
-distance = -190.0
 
 [node name="Node2D" type="Node2D" unique_id=2053608586]
 
@@ -21,15 +20,17 @@ position = Vector2(22, 6)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=267912386]
 position = Vector2(-22, -6)
+zoom = Vector2(2, 2)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1177873918]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=923093964]
+position = Vector2(0, 150)
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=984932711]
 stream = ExtResource("2_yqjtg")
 autoplay = true
 
-[node name="CharacterBody2D2" parent="." unique_id=188171215 instance=ExtResource("3_lnu2h")]
-position = Vector2(-43, 31)
+[node name="Bear" parent="." unique_id=188171215 instance=ExtResource("3_lnu2h")]
+position = Vector2(-37, 37)
