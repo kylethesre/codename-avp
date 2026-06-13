@@ -43,6 +43,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwvi0"]
 
 [node name="Snake" type="CharacterBody2D" unique_id=165947573]
+collision_layer = 4
 script = ExtResource("1_yc36x")
 stats = ExtResource("2_auphx")
 
