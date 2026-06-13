@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cvopnqkqf1pni"]
+
+[ext_resource type="Script" uid="uid://b2cbd8wrsk222" path="res://scripts/enemy_base.gd" id="1_7q37y"]
+[ext_resource type="Texture2D" uid="uid://bcc0mu6u0d7q5" path="res://assets/retrorpg/Beatle.png" id="1_pnjsp"]
+[ext_resource type="Resource" uid="uid://bmx8s0p0f71p2" path="res://stats/beatle.tres" id="2_ioycx"]
+[ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_jmh3t"]
+[ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_1u11n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3ifu"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7q37y"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioycx"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmh3t"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1u11n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3ifu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7q37y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioycx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmh3t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_holp5"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r7moy"]
+radius = 107.042046
+
+[node name="Beatle" type="CharacterBody2D" unique_id=115423585]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_7q37y")
+stats = ExtResource("2_ioycx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=83509745]
+sprite_frames = SubResource("SpriteFrames_1u11n")
+frame_progress = 0.27807897
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1010182625]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_holp5")
+
+[node name="Basic Gun2" type="Node2D" parent="." unique_id=120207343]
+position = Vector2(-22, -6)
+script = ExtResource("4_jmh3t")
+projectile_scene = ExtResource("5_1u11n")
+damage = 1.0
+target_layer = 2
+
+[node name="Cooldown" type="Timer" parent="Basic Gun2" unique_id=2026269643]
+wait_time = 2.0
+autostart = true
+
+[node name="Radar" type="Area2D" parent="Basic Gun2" unique_id=756648990]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Basic Gun2/Radar" unique_id=297250031]
+modulate = Color(0.92195034, 0, 0.16522196, 0.54901963)
+position = Vector2(21, 8)
+shape = SubResource("CircleShape2D_r7moy")
+
+[connection signal="timeout" from="Basic Gun2/Cooldown" to="Basic Gun2" method="_on_cooldown_timeout"]

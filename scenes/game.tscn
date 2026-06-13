@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cv1vbvnynxjgt" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01.png" id="2_p57ef"]
 [ext_resource type="AudioStream" uid="uid://b1f4rai8klm28" path="res://music/Placeholder_music.mp3" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/bear.tscn" id="3_lnu2h"]
-[ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scenes/basic_gun_1.gd" id="4_vtaks"]
+[ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemy_pool.tscn" id="7_u5sy4"]
@@ -43,7 +43,6 @@ position = Vector2(22, 6)
 position = Vector2(-22, -6)
 zoom = Vector2(2, 2)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
 [node name="Basic Gun1" type="Node2D" parent="CharacterBody2D" unique_id=589769389]
 position = Vector2(-22, -6)
 script = ExtResource("4_vtaks")
@@ -61,6 +60,8 @@ collision_mask = 0
 modulate = Color(0.92195034, 0, 0.16522196, 0.54901963)
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_dinhu")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1177873918]
 
