@@ -10,13 +10,26 @@
 [ext_resource type="PackedScene" uid="uid://c85ouliehxjhs" path="res://scenes/snake.tscn" id="8_gee14"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
+distance = -1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gee14"]
+normal = Vector2(0, 1)
+distance = -32.0
 
 [node name="Node2D" type="Node2D" unique_id=2053608586]
 
-[node name="Background" parent="." unique_id=575990805 instance=ExtResource("1_iywne")]
-position = Vector2(22, -15)
-scale = Vector2(5.3624997, 4.175)
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1080516206]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Background" parent="Parallax2D" unique_id=575990805 instance=ExtResource("1_iywne")]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-21, -86)
+scale = Vector2(2.0375001, 2.8666668)
 texture = ExtResource("2_p57ef")
+centered = false
 
 [node name="CharacterBody2D" parent="." unique_id=1662778846 groups=["Player"] instance=ExtResource("2_lnu2h")]
 position = Vector2(22, 6)
@@ -25,11 +38,19 @@ position = Vector2(22, 6)
 position = Vector2(-22, -6)
 zoom = Vector2(2, 2)
 
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1177873918]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=923093964]
 position = Vector2(1, 484)
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1622155924]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=868610179]
+position = Vector2(-1, -51)
+shape = SubResource("WorldBoundaryShape2D_gee14")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=984932711]
 stream = ExtResource("2_yqjtg")
@@ -39,6 +60,7 @@ autoplay = true
 position = Vector2(-37, 37)
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=1842147751]
+position = Vector2(0, 1)
 script = ExtResource("6_p57ef")
 enemy_pool_scene = ExtResource("7_u5sy4")
 
