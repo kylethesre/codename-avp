@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b46wen7yvqxn6"]
+
+[ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="1_d1m1h"]
+[ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="2_k2s4h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
+radius = 160.00313
+
+[node name="Basic Gun1" type="Node2D" unique_id=831879572]
+script = ExtResource("1_d1m1h")
+projectile_scene = ExtResource("2_k2s4h")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=1001667058]
+wait_time = 0.5
+autostart = true
+
+[node name="Radar" type="Area2D" parent="." unique_id=1347818429]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar" unique_id=417707327]
+modulate = Color(0.92195034, 0, 0.16522196, 0.54901963)
+position = Vector2(21, 4)
+shape = SubResource("CircleShape2D_dinhu")
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

@@ -4,15 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dtf5v77dx3dvt" path="res://scenes/character.tscn" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cv1vbvnynxjgt" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01.png" id="2_p57ef"]
 [ext_resource type="AudioStream" uid="uid://b1f4rai8klm28" path="res://music/Placeholder_music.mp3" id="2_yqjtg"]
-[ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_vtaks"]
-[ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://by6tpmwv73i12" path="res://scenes/hud.tscn" id="7_gee14"]
-[ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemy_pool.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemies/enemy_pool.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cdrqql6g8e2bv" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
-radius = 160.00313
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 distance = -1.0
@@ -57,24 +52,6 @@ motion_mode = 1
 position = Vector2(-22, -6)
 zoom = Vector2(2, 2)
 
-[node name="Basic Gun1" type="Node2D" parent="CharacterBody2D" unique_id=589769389]
-position = Vector2(-22, -6)
-script = ExtResource("4_vtaks")
-projectile_scene = ExtResource("5_kvpfn")
-
-[node name="Cooldown" type="Timer" parent="CharacterBody2D/Basic Gun1" unique_id=917939684]
-wait_time = 0.5
-autostart = true
-
-[node name="Radar" type="Area2D" parent="CharacterBody2D/Basic Gun1" unique_id=1750241460]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Basic Gun1/Radar" unique_id=103123270]
-modulate = Color(0.92195034, 0, 0.16522196, 0.54901963)
-position = Vector2(21, 4)
-shape = SubResource("CircleShape2D_dinhu")
-
 [node name="Timer" type="Timer" parent="CharacterBody2D" unique_id=2098879579]
 wait_time = 0.8
 one_shot = true
@@ -114,6 +91,5 @@ autostart = true
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
 tile_set = SubResource("TileSet_vtaks")
 
-[connection signal="timeout" from="CharacterBody2D/Basic Gun1/Cooldown" to="CharacterBody2D/Basic Gun1" method="_on_cooldown_timeout"]
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="EnemySpawner/WaveTimer" to="EnemySpawner" method="_on_wave_timer_timeout"]

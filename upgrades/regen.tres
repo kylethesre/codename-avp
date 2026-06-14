@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://boutn0nwebkga"]
+
+[ext_resource type="Script" uid="uid://cbaspi18oo6xg" path="res://scripts/Upgrade.gd" id="1_so1se"]
+
+[resource]
+script = ExtResource("1_so1se")
+id = "gun"
+name = "Gun"
+desc = "Automatically shoots nearby enemies every 1 second"
+metadata/_custom_type_script = "uid://cbaspi18oo6xg"
