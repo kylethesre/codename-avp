@@ -6,6 +6,7 @@ extends Node2D
 @export var current_wave: int = 1
 @export var spawn_radius: float = 400.0
 @export var spawn_cooldown: float = .1
+@export var spawn_rate_curve: Curve
 
 @onready var timer: Timer = $Timer
 var player: Node2D = null
@@ -39,12 +40,16 @@ func spawn_random_enemy() -> void:
 	# 1. Get all the enemy templates inside the pool scene
 	var available_enemies = pool_instance.get_children()
 	
+	 # Compute the spawning graph and output a multiplyer based on it.
+	var curve_strength: float = 100 * spawn_rate_curve.sample_baked(get_tree().get_nodes_in_group('enemies').size())
+	print("Current Spawn rate is", curve_strength, "----", get_tree().get_nodes_in_group('enemies').size())
 	
 	# Loop through available_enemies and try to spawn each one based on its waves value(spawn chance)
 	for Enemy in available_enemies:
 		var random_dice_roll: int = randi_range(1, 100)
 		# 2. Check if current selected enemy can be spawned.
-		if random_dice_roll <= Enemy.stats.waves[current_wave-1]:
+		# 2.5 Also slow spawning if there are too many enemies on the board.
+		if random_dice_roll <= Enemy.stats.waves[current_wave-1] && random_dice_roll <= curve_strength:
 			
 			# 3. Duplicate it so we don't steal the original template
 			var enemy_instance = Enemy.duplicate() as Node2D

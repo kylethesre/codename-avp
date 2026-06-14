@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://ddqx561hibqra" path="res://scenes/hud.tscn" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://by6tpmwv73i12" path="res://scenes/hud.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemy_pool.tscn" id="7_u5sy4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
@@ -19,6 +19,11 @@ distance = -1.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gee14"]
 normal = Vector2(0, 1)
 distance = -32.0
+
+[sub_resource type="Curve" id="Curve_0tnpc"]
+_limits = [0.0, 1.0, 0.0, 150.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.49532712, 1), 0.0, 0.0, 0, 0, Vector2(58.8785, 0.92134833), -0.0070375423, -0.0070375423, 0, 0, Vector2(75.700935, 0.49438208), -0.025310466, -0.025310466, 0, 0, Vector2(100.23364, 0.078651786), -0.00854931, -0.00854931, 0, 0, Vector2(124.76635, 0), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [node name="Node2D" type="Node2D" unique_id=2053608586]
 
@@ -90,6 +95,7 @@ autoplay = true
 position = Vector2(0, 1)
 script = ExtResource("6_p57ef")
 enemy_pool_scene = ExtResource("7_u5sy4")
+spawn_rate_curve = SubResource("Curve_0tnpc")
 
 [node name="WaveTimer" type="Timer" parent="EnemySpawner" unique_id=689960714]
 wait_time = 60.0
