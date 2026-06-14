@@ -4,11 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dtf5v77dx3dvt" path="res://scenes/character.tscn" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cv1vbvnynxjgt" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01.png" id="2_p57ef"]
 [ext_resource type="AudioStream" uid="uid://b1f4rai8klm28" path="res://music/Placeholder_music.mp3" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/bear.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://by6tpmwv73i12" path="res://scenes/hud.tscn" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://ddqx561hibqra" path="res://scenes/hud.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemy_pool.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://c85ouliehxjhs" path="res://scenes/snake.tscn" id="8_gee14"]
 
@@ -65,6 +64,7 @@ collision_mask = 0
 modulate = Color(0.92195034, 0, 0.16522196, 0.54901963)
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_dinhu")
+
 [node name="KnockbackArea" type="Area2D" parent="CharacterBody2D" unique_id=1783868435]
 collision_layer = 0
 collision_mask = 2
@@ -109,7 +109,5 @@ collision_layer = 2
 [node name="HUD" parent="." unique_id=167591975 instance=ExtResource("7_gee14")]
 
 [connection signal="timeout" from="CharacterBody2D/Basic Gun1/Cooldown" to="CharacterBody2D/Basic Gun1" method="_on_cooldown_timeout"]
-
 [connection signal="body_entered" from="CharacterBody2D/KnockbackArea" to="CharacterBody2D" method="_on_knockback_area_body_entered"]
-
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]

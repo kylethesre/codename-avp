@@ -8,6 +8,7 @@ func _ready() -> void:
 	if player:
 		for child in get_children():
 			child.queue_free()
+		await Engine.get_main_loop().process_frame
 		player.health_changed.connect(update_display)
 		update_display(player.health, player.max_health)
 
