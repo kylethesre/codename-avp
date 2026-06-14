@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d3mcyyxw3fmdr"]
 
 [ext_resource type="PackedScene" uid="uid://cvopnqkqf1pni" path="res://scenes/enemies/beatle.tscn" id="2_2o5xi"]
-[ext_resource type="PackedScene" uid="uid://c85ouliehxjhs" path="res://scenes/snake.tscn" id="2_72rqm"]
+[ext_resource type="PackedScene" uid="uid://c85ouliehxjhs" path="res://scenes/enemies/snake.tscn" id="2_72rqm"]
 [ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/enemies/bear.tscn" id="3_2o5xi"]
 [ext_resource type="PackedScene" uid="uid://b33inxy054sf5" path="res://scenes/enemies/wolf.tscn" id="4_fvo42"]
 

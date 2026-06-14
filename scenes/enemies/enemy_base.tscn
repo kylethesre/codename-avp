@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vv3x1"]
 
 [node name="EnemyBase" type="CharacterBody2D" unique_id=1030623349]
+collision_mask = 0
 script = ExtResource("1_sw0xa")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=391370511]

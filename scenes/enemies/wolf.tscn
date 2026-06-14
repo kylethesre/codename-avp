@@ -78,7 +78,7 @@ size = Vector2(10, 8)
 
 [node name="wolf" type="CharacterBody2D" unique_id=782464402]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 6
 script = ExtResource("1_v5w4o")
 stats = ExtResource("2_g1eps")
 
