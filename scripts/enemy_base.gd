@@ -43,6 +43,7 @@ func _physics_process(_delta: float) -> void:
 func apply_knockback(force: Vector2) -> void:
 	print("Enemy ", name, " received knockback force: ", force) # Now this will work!
 	knockback_velocity = force
+
 ## A quick function showing how armor and health interact
 func take_damage(amount: float) -> void:
 	if not stats: return

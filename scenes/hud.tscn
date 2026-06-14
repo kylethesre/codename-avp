@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://by6tpmwv73i12"]
+
+[ext_resource type="Texture2D" uid="uid://u8bgwv7m8oa1" path="res://assets/ui/heart_animated_2.png" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://bwayg7vocn8og" path="res://scripts/heart_container.gd" id="1_oo0fn"]
+[ext_resource type="PackedScene" uid="uid://8hs7nq2ai5vi" path="res://scenes/heart.tscn" id="2_5ysmq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo0fn"]
+atlas = ExtResource("1_ahhtf")
+region = Rect2(0, 0, 17, 17)
+
+[node name="HUD" type="CanvasLayer" unique_id=167591975]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="HeartContainer" type="HBoxContainer" parent="." unique_id=1548093651]
+clip_contents = true
+custom_minimum_size = Vector2(17, 5.395)
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 133.0
+offset_bottom = 21.0
+script = ExtResource("1_oo0fn")
+
+[node name="Heart" parent="HeartContainer" unique_id=977432540 instance=ExtResource("2_5ysmq")]
+layout_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="HeartContainer" unique_id=611956888]
+layout_mode = 2
+texture = SubResource("AtlasTexture_oo0fn")
+
+[node name="Heart3" type="TextureRect" parent="HeartContainer" unique_id=128249468]
+layout_mode = 2
+texture = SubResource("AtlasTexture_oo0fn")
+
+[node name="Heart4" type="TextureRect" parent="HeartContainer" unique_id=1030046570]
+layout_mode = 2
+texture = SubResource("AtlasTexture_oo0fn")

@@ -1,9 +1,21 @@
 extends CharacterBody2D
-
+class_name Player
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+var health: int = 4
+@export var max_health: int = 4
+
+signal health_changed(health: int, max_health: int)
+
+func _ready() -> void:
+	health_changed.emit(health, max_health)
+
+func _input(event: InputEvent) -> void:
+	if event.get_action_strength("ui_accept"):
+		health -= 1
+		health_changed.emit(health, max_health)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

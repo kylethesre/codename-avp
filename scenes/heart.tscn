@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://8hs7nq2ai5vi"]
+
+[ext_resource type="Texture2D" uid="uid://u8bgwv7m8oa1" path="res://assets/ui/heart_animated_2.png" id="1_v30as"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo0fn"]
+atlas = ExtResource("1_v30as")
+region = Rect2(0, 0, 17, 17)
+
+[node name="Heart" type="TextureRect" unique_id=977432540]
+texture = SubResource("AtlasTexture_oo0fn")
