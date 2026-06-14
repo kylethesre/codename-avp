@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vampire"
+ability = null
+weight = 30
+max_instances = 1
+prerequisites = []
+mutually_exclusive = []
+rarity = 2
+name = "Life Steal"
+desc = "Heal 1 HP on each kill"
+is_ability = false

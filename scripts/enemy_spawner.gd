@@ -1,6 +1,10 @@
 extends Node2D
 
+signal wave_started(wave: int)
+
 @export_category("Spawn Settings")
+## Seconds between each wave. Upgrade selection appears when the timer fires.
+@export var wave_duration: float = 15.0
 ## Drag and drop your EnemyPool.tscn file here once
 @export var enemy_pool_scene: PackedScene
 @export var current_wave: int = 1
@@ -9,6 +13,7 @@ extends Node2D
 @export var spawn_rate_curve: Curve
 
 @onready var timer: Timer = $Timer
+@onready var wave_timer: Timer = $WaveTimer
 var player: Node2D = null
 var pool_instance: Node = null
 
@@ -28,6 +33,11 @@ func _ready() -> void:
 	timer.wait_time = spawn_cooldown
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
+	
+	# Wave timer triggers upgrade selection at the start of each wave
+	wave_timer.wait_time = wave_duration
+	wave_timer.timeout.connect(_on_wave_timer_timeout)
+	wave_timer.start()
 
 func _on_timer_timeout() -> void:
 	# Safety check: make sure the pool has enemies and player exists
@@ -68,8 +78,8 @@ func spawn_random_enemy() -> void:
 			enemy_instance.global_position = spawn_position
 			get_parent().add_child(enemy_instance)
 			enemy_instance.add_to_group("enemies")
-			
 
 func _on_wave_timer_timeout() -> void:
-	print(current_wave)
 	current_wave += 1
+	print("Wave ", current_wave, " started!")
+	emit_signal("wave_started", current_wave)

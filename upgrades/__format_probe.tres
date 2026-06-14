@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1_5jdun"]
+
+[resource]
+script = ExtResource("1_5jdun")
+id = "test"
+prerequisites = Array[String](["gun"])
+mutually_exclusive = Array[String](["regen", "shield"])

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "explosive_shots"
+ability = null
+weight = 40
+max_instances = 1
+prerequisites = []
+mutually_exclusive = ["piercing_shots"]
+rarity = 2
+name = "Explosive Rounds"
+desc = "Projectiles explode on impact (cannot pierce)"
+is_ability = false

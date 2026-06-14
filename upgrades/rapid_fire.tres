@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "rapid_fire"
+ability = null
+weight = 80
+max_instances = 1
+prerequisites = []
+mutually_exclusive = []
+rarity = 1
+name = "Rapid Fire"
+desc = "Increase fire rate by 30%"
+is_ability = false

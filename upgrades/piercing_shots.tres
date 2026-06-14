@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "piercing_shots"
+ability = null
+weight = 70
+max_instances = 1
+prerequisites = []
+mutually_exclusive = []
+rarity = 1
+name = "Piercing Shots"
+desc = "Projectiles pierce through enemies"
+is_ability = false

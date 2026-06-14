@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "spread_shot"
+ability = null
+weight = 50
+max_instances = 1
+prerequisites = ["double_shot"]
+mutually_exclusive = ["triple_shot"]
+rarity = 2
+name = "Spread Shot"
+desc = "Fire projectiles in a cone pattern (replaces triple shot path)"
+is_ability = false
