@@ -18,7 +18,7 @@ distance = -1.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gee14"]
 normal = Vector2(0, 1)
-distance = -32.0
+distance = -5.0
 
 [sub_resource type="Curve" id="Curve_0tnpc"]
 _limits = [0.0, 1.0, 0.0, 150.0]
@@ -33,6 +33,7 @@ repeat_size = Vector2(640, 0)
 repeat_times = 3
 
 [node name="Background" parent="Parallax2D" unique_id=575990805 instance=ExtResource("1_iywne")]
+y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(-21, -86)

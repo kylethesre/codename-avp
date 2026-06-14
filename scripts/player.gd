@@ -10,6 +10,10 @@ var health: int = 4
 
 signal health_changed(health: int, max_health: int)
 
+# --- WE MOVED THIS HERE ---
+# It is best practice to keep your node references at the top!
+@onready var animated_sprite = $AnimatedSprite2D
+
 func take_damage(amount: int = 1):
 	health -= amount
 	health_changed.emit(health, max_health)
@@ -24,7 +28,6 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction_vector := Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
 	var normalized_direction := direction_vector.normalized()
 	
@@ -38,7 +41,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(knockback_velocity, SPEED)
 	
-	
 	move_and_slide()
 	
 	for i in get_slide_collision_count():
@@ -50,39 +52,23 @@ func _physics_process(delta: float) -> void:
 				take_damage()
 				$Timer.start()
 
-
-#Knockback enemies in a circle radius automatically when anything enters area
-#func _on_knockback_area_body_entered(body: Node2D) -> void:
-#	print("something entered the area: ", body) #debug check
-#	print(get_tree().get_nodes_in_group("enemies"))
-	#direction
-#	if body.is_in_group("enemies"):
-#		for enemy in get_tree().get_nodes_in_group("enemies"):
-#			print("enemy detected! sending knockback signal.") # 2nd debug check
-#			var direction = (enemy.global_position - global_position).normalized()
-			
-#			if enemy.has_method("apply_knockback"):
-#				enemy.apply_knockback(direction * 300.0)
-
-
-
-	
+#Knockback feature
 func trigger_radial_knockback():
 	var pulse_radius = 75.0
 	var max_knockback_force = 800.0
 	
-	# 1. Get every enemy in the entire game world
+	#Get every enemy in the entire game world
 	var all_enemies = get_tree().get_nodes_in_group("enemies")
 	
-	# 2. Loop through every single one
+	#Loop through every single one
 	for enemy in all_enemies:
 		# Check distance between Player and THIS specific enemy
 		var distance = global_position.distance_to(enemy.global_position)
 		
-		# 3. Only apply logic if they are within our radius
+		#Only apply logic if they are within player radius
 		if distance <= pulse_radius:
 			
-			# Calculate falloff (closer = more power, further = less power)
+			#Calculate falloff (closer = more power, further = less power)
 			var strength = clamp(1.0 - (distance / pulse_radius), 0.0, 1.0)
 			var final_force = max_knockback_force * strength
 			
@@ -91,3 +77,16 @@ func trigger_radial_knockback():
 				var direction = (enemy.global_position - global_position).normalized()
 				enemy.apply_knockback(direction * final_force)
 				
+#Animation process to make the sprites flip
+func _process(_delta):
+	#If the character's velocity is greater than 0, they are moving.
+	if velocity.length() > 0:
+		animated_sprite.play("Run")
+		
+		#Flip the sprite left/right based on horizontal movement
+		if velocity.x != 0:
+			animated_sprite.flip_h = velocity.x < 0
+			
+	#If the velocity is exactly 0, they are standing still.
+	else:
+		animated_sprite.play("Idle")
