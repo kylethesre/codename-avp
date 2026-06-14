@@ -13,6 +13,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
 radius = 160.00313
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_gee14"]
 radius = 32.01562
 
@@ -103,9 +104,10 @@ enemy_pool_scene = ExtResource("7_u5sy4")
 
 [node name="Snake" parent="." unique_id=165947573 groups=["enemies"] instance=ExtResource("8_gee14")]
 position = Vector2(-53, -39)
-
-[connection signal="timeout" from="CharacterBody2D/Basic Gun1/Cooldown" to="CharacterBody2D/Basic Gun1" method="_on_cooldown_timeout"]
 collision_layer = 2
 
+[connection signal="timeout" from="CharacterBody2D/Basic Gun1/Cooldown" to="CharacterBody2D/Basic Gun1" method="_on_cooldown_timeout"]
+
 [connection signal="body_entered" from="CharacterBody2D/KnockbackArea" to="CharacterBody2D" method="_on_knockback_area_body_entered"]
+
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
