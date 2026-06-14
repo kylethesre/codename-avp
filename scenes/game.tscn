@@ -14,9 +14,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
 radius = 160.00313
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gee14"]
-radius = 32.01562
-
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 distance = -1.0
 
@@ -43,6 +40,7 @@ metadata/_edit_lock_ = true
 [node name="CharacterBody2D" parent="." unique_id=1662778846 groups=["Player"] instance=ExtResource("2_lnu2h")]
 position = Vector2(22, 6)
 collision_mask = 7
+motion_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=267912386]
 position = Vector2(-22, -6)
@@ -65,13 +63,6 @@ collision_mask = 0
 modulate = Color(0.92195034, 0, 0.16522196, 0.54901963)
 position = Vector2(21, 4)
 shape = SubResource("CircleShape2D_dinhu")
-
-[node name="KnockbackArea" type="Area2D" parent="CharacterBody2D" unique_id=1783868435]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/KnockbackArea" unique_id=1785450377]
-shape = SubResource("CircleShape2D_gee14")
 
 [node name="Timer" type="Timer" parent="CharacterBody2D" unique_id=2098879579]
 wait_time = 0.8
@@ -113,8 +104,5 @@ collision_layer = 2
 [node name="HUD" parent="." unique_id=167591975 instance=ExtResource("7_gee14")]
 
 [connection signal="timeout" from="CharacterBody2D/Basic Gun1/Cooldown" to="CharacterBody2D/Basic Gun1" method="_on_cooldown_timeout"]
-[connection signal="body_entered" from="CharacterBody2D/KnockbackArea" to="CharacterBody2D" method="_on_knockback_area_body_entered"]
-[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
-
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="EnemySpawner/WaveTimer" to="EnemySpawner" method="_on_wave_timer_timeout"]

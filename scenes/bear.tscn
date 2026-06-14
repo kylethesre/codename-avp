@@ -276,6 +276,7 @@ animations = [{
 radius = 8.062258
 
 [node name="Bear" type="CharacterBody2D" unique_id=188171215]
+motion_mode = 1
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=610739066]
 tree_root = SubResource("AnimationNodeStateMachine_a3xf0")
