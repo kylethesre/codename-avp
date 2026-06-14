@@ -16,6 +16,11 @@ var knockback_velocity = Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D
 
 func _ready() -> void:
+	# Add to enemies group for soft collision and player damage logic
+	add_to_group("enemies")
+	# Turn off hard physical collision with other enemies (Layer 3)
+	set_collision_mask_value(3, false)
+	
 	# Initialize health using the resource data
 	if stats:
 		current_health = stats.max_health
@@ -39,8 +44,24 @@ func _physics_process(_delta: float) -> void:
 	elif player and stats:
 		var direction = (player.global_position - global_position).normalized()
 		
+		# Calculate separation to avoid overlapping other enemies
+		var separation = Vector2.ZERO
+		var neighbors = get_tree().get_nodes_in_group("enemies")
+		var min_separation_dist = 24.0 # Adjust based on enemy sprite size
+		
+		for neighbor in neighbors:
+			if neighbor == self or not is_instance_valid(neighbor):
+				continue
+			var diff = global_position - neighbor.global_position
+			var dist = diff.length()
+			if dist > 0 and dist < min_separation_dist:
+				# Push away strongly the closer they are
+				separation += diff.normalized() * (1.0 - (dist / min_separation_dist))
+		
+		var final_direction = (direction + separation * 1.5).normalized()
+		
 		# 3. Use the speed value stored inside our resource!
-		velocity = direction * stats.speed
+		velocity = final_direction * stats.speed
 		move_and_slide()
 		
 	#Call animation after calculating velocity	
