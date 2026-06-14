@@ -2,12 +2,17 @@ extends CharacterBody2D
 class_name Player
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+
+var knockback_velocity = Vector2.ZERO
 
 var health: int = 4
 @export var max_health: int = 4
 
 signal health_changed(health: int, max_health: int)
+
+func take_damage(amount: int = 1):
+	health -= amount
+	health_changed.emit(health, max_health)
 
 func _ready() -> void:
 	health_changed.emit(health, max_health)
@@ -18,26 +23,32 @@ func _input(event: InputEvent) -> void:
 		health_changed.emit(health, max_health)
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction_vector := Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
 	var normalized_direction := direction_vector.normalized()
 	
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 500 * delta)
+	
+	var movement_velocity = Vector2.ZERO
+	
 	if direction_vector.length_squared() > 0.5:
-		velocity.x = normalized_direction.x * SPEED
-		velocity.y = normalized_direction.y * SPEED
+		movement_velocity = normalized_direction * SPEED
+		velocity = movement_velocity + knockback_velocity
 	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity = velocity.move_toward(knockback_velocity, SPEED)
+	
+	
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().is_in_group("enemies"):
+			if $Timer.is_stopped():
+				trigger_radial_knockback()
+				knockback_velocity = (global_position - collision.get_collider().global_position).normalized() * 100
+				take_damage()
+				$Timer.start()
 
 
 #Knockback enemies in a circle radius automatically when anything enters area
@@ -80,11 +91,3 @@ func trigger_radial_knockback():
 				var direction = (enemy.global_position - global_position).normalized()
 				enemy.apply_knockback(direction * final_force)
 				
-func _on_knockback_area_body_entered(body: Node2D) -> void:
-	print("something entered the area: ", body) #debug check
-	print(get_tree().get_nodes_in_group("enemies"))
-	#direction
-	if body.is_in_group("enemies"):
-		if $Timer.is_stopped():
-			trigger_radial_knockback()
-			$Timer.start()
