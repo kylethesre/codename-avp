@@ -36,7 +36,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_1p8c4")
 }],
 "loop": true,
-"name": &"Slither",
+"name": &"walk_side",
 "speed": 5.0
 }]
 
@@ -51,8 +51,8 @@ stats = ExtResource("2_auphx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=532034382]
 sprite_frames = SubResource("SpriteFrames_oj63r")
-animation = &"Slither"
-autoplay = "Slither"
+animation = &"walk_side"
+autoplay = "walk_side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=40411708]
 shape = SubResource("CircleShape2D_dwvi0")

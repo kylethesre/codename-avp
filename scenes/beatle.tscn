@@ -6,22 +6,6 @@
 [ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_jmh3t"]
 [ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_1u11n"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1u11n"]
-atlas = ExtResource("1_pnjsp")
-region = Rect2(0, 128, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_holp5"]
-atlas = ExtResource("1_pnjsp")
-region = Rect2(16, 128, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r7moy"]
-atlas = ExtResource("1_pnjsp")
-region = Rect2(32, 128, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lraxr"]
-atlas = ExtResource("1_pnjsp")
-region = Rect2(48, 128, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_w3ifu"]
 atlas = ExtResource("1_pnjsp")
 region = Rect2(0, 0, 16, 16)
@@ -38,25 +22,24 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("1_pnjsp")
 region = Rect2(48, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u11n"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_holp5"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(16, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7moy"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(32, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lraxr"]
+atlas = ExtResource("1_pnjsp")
+region = Rect2(48, 128, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1u11n"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1u11n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_holp5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r7moy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lraxr")
-}],
-"loop": true,
-"name": &"Beatle Fly",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w3ifu")
@@ -72,6 +55,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u11n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_holp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7moy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lraxr")
+}],
+"loop": true,
+"name": &"walk_side",
 "speed": 5.0
 }]
 
@@ -89,8 +89,8 @@ stats = ExtResource("2_ioycx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=83509745]
 sprite_frames = SubResource("SpriteFrames_1u11n")
-animation = &"Beatle Fly"
-autoplay = "Beatle Fly"
+animation = &"walk_side"
+autoplay = "walk_side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1010182625]
 position = Vector2(0, 2)
