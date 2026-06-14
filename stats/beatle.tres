@@ -7,4 +7,5 @@ script = ExtResource("1_23ahk")
 max_health = 11.0
 attack = 5.0
 speed = 20.0
+waves = Array[float]([0.0, 100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 metadata/_custom_type_script = "uid://blx12wk8dq8vn"

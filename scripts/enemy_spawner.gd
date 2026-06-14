@@ -3,9 +3,9 @@ extends Node2D
 @export_category("Spawn Settings")
 ## Drag and drop your EnemyPool.tscn file here once
 @export var enemy_pool_scene: PackedScene
-
+@export var current_wave: int = 1
 @export var spawn_radius: float = 400.0
-@export var spawn_cooldown: float = 2.0
+@export var spawn_cooldown: float = .1
 
 @onready var timer: Timer = $Timer
 var player: Node2D = null
@@ -39,18 +39,26 @@ func spawn_random_enemy() -> void:
 	# 1. Get all the enemy templates inside the pool scene
 	var available_enemies = pool_instance.get_children()
 	
-	# 2. Pick a random one
-	var random_enemy_template = available_enemies.pick_random()
 	
-	# 3. Duplicate it so we don't steal the original template
-	var enemy_instance = random_enemy_template.duplicate() as Node2D
+	# Loop through available_enemies and try to spawn each one based on its waves value(spawn chance)
+	for Enemy in available_enemies:
+		var random_dice_roll: int = randi_range(1, 100)
+		# 2. Check if current selected enemy can be spawned.
+		if random_dice_roll <= Enemy.stats.waves[current_wave-1]:
+			
+			# 3. Duplicate it so we don't steal the original template
+			var enemy_instance = Enemy.duplicate() as Node2D
+			
+			# 4. Calculate a random position on a circle around the player
+			var random_angle = randf_range(0, 2 * PI)
+			var spawn_offset = Vector2(cos(random_angle), sin(random_angle)) * spawn_radius
+			var spawn_position = player.global_position + spawn_offset
 	
-	# 4. Calculate a random position on a circle around the player
-	var random_angle = randf_range(0, 2 * PI)
-	var spawn_offset = Vector2(cos(random_angle), sin(random_angle)) * spawn_radius
-	var spawn_position = player.global_position + spawn_offset
-	
-	# 5. Position and spawn the enemy into the main world
-	enemy_instance.global_position = spawn_position
-	get_parent().add_child(enemy_instance)
-	enemy_instance.add_to_group("enemies")
+			# 5. Position and spawn the enemy into the main world
+			enemy_instance.global_position = spawn_position
+			get_parent().add_child(enemy_instance)
+			enemy_instance.add_to_group("enemies")
+			
+
+func _on_wave_timer_timeout() -> void:
+	current_wave += 1

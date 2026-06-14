@@ -9,3 +9,7 @@ extends Resource
 
 @export_category("Movement")
 @export var speed: float = 10.0
+
+
+@export_category("Spawn Chance")
+@export var waves: Array[float] = []
