@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cvopnqkqf1pni" path="res://scenes/enemies/beatle.tscn" id="2_2o5xi"]
 [ext_resource type="PackedScene" uid="uid://c85ouliehxjhs" path="res://scenes/snake.tscn" id="2_72rqm"]
-[ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/bear.tscn" id="3_2o5xi"]
+[ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/enemies/bear.tscn" id="3_2o5xi"]
+[ext_resource type="PackedScene" uid="uid://b33inxy054sf5" path="res://scenes/enemies/wolf.tscn" id="4_fvo42"]
 
 [node name="EnemyPool" type="Node2D" unique_id=1161567536]
 
@@ -12,3 +13,5 @@
 
 [node name="Bear" parent="." unique_id=534435115 instance=ExtResource("3_2o5xi")]
 position = Vector2(10.918175, -1.1917915)
+
+[node name="wolf" parent="." unique_id=782464402 instance=ExtResource("4_fvo42")]
