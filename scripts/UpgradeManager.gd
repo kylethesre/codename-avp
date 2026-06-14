@@ -117,14 +117,24 @@ func _on_upgrade_selected(upgrade: Upgrade) -> void:
 	obtained_upgrades.append(upgrade.id)
 	
 	if not is_instance_valid(player):
-		player = get_tree().get_first_node_in_group("Player")
-		
+		var found_player = get_tree().get_first_node_in_group("Player")
+		if found_player is Player:
+			player = found_player as Player
+		else:
+			push_error("UpgradeManager: Found node in 'Player' group but it is not of type 'Player'!")
+			
+	print("UpgradeManager Debug: upgrade=", upgrade.id, " ability=", upgrade.ability)
+	
 	# Instantiate ability under player if applicable
-	if upgrade.is_ability and upgrade.ability:
+	if upgrade.ability:
 		var ability_instance: Node = upgrade.ability.instantiate()
 		if player:
 			player.add_child(ability_instance)
 			ability_instance.owner = player
+			print("UpgradeManager: Successfully instantiated and attached ability: ", upgrade.name)
 		else:
 			push_error("UpgradeManager: No player found when applying upgrade!")
+	else:
+		print("UpgradeManager: Upgrade selected is not an ability or has no scene attached.")
+		
 	emit_signal("upgrade_chosen", upgrade)
