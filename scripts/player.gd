@@ -37,6 +37,10 @@ func _physics_process(delta: float) -> void:
 	
 	if direction_vector.length_squared() > 0.5:
 		movement_velocity = normalized_direction * SPEED
+		
+		if movement_velocity.x != 0:
+			animated_sprite.flip_h = movement_velocity.x < 0
+		
 		velocity = movement_velocity + knockback_velocity
 	else:
 		velocity = velocity.move_toward(knockback_velocity, SPEED)
@@ -76,16 +80,12 @@ func trigger_radial_knockback():
 			if enemy.has_method("apply_knockback"):
 				var direction = (enemy.global_position - global_position).normalized()
 				enemy.apply_knockback(direction * final_force)
-				
+
 #Animation process to make the sprites flip
 func _process(_delta):
 	#If the character's velocity is greater than 0, they are moving.
 	if velocity.length() > 0:
 		animated_sprite.play("Run")
-		
-		#Flip the sprite left/right based on horizontal movement
-		if velocity.x != 0:
-			animated_sprite.flip_h = velocity.x < 0
 			
 	#If the velocity is exactly 0, they are standing still.
 	else:
