@@ -27,8 +27,10 @@ func _on_resume_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	#quit closes game window
-	get_tree().quit()
+	#quit takes you back to main menu
+	get_tree().paused = false
+	#load main menu scene
+	get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
 "
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1214514540]
