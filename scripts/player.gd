@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED = 300.0
+const SPEED = 200.0
 
 var knockback_velocity = Vector2.ZERO
 
