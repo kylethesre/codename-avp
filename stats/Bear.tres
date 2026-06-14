@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bjht2fumtw3b2"]
+
+[ext_resource type="Script" uid="uid://blx12wk8dq8vn" path="res://scripts/EnemyStats.gd" id="1_w7y64"]
+
+[resource]
+script = ExtResource("1_w7y64")
+max_health = 20.0
+attack = 7.0
+speed = 13.0
+waves = Array[float]([0.0, 0.0, 0.0, 0.0, 2.0, 4.0, 4.0, 10.0, 15.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 120.0])
+metadata/_custom_type_script = "uid://blx12wk8dq8vn"

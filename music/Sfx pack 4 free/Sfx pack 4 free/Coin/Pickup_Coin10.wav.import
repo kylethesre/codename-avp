@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tv1o6jmjfxfb"
+path="res://.godot/imported/Pickup_Coin10.wav-9ed1e6017e913851299a758d251a5637.sample"
+
+[deps]
+
+source_file="res://music/Sfx pack 4 free/Sfx pack 4 free/Coin/Pickup_Coin10.wav"
+dest_files=["res://.godot/imported/Pickup_Coin10.wav-9ed1e6017e913851299a758d251a5637.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

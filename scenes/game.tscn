@@ -3,11 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://bq46cdiwnuxe5" path="res://scenes/background.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dtf5v77dx3dvt" path="res://scenes/character.tscn" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cv1vbvnynxjgt" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01.png" id="2_p57ef"]
-[ext_resource type="AudioStream" uid="uid://b1f4rai8klm28" path="res://music/Placeholder_music.mp3" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_vtaks"]
+[ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
+[ext_resource type="AudioStream" uid="uid://gbxl2rg86qdl" path="res://music/xDeviruchi - 16 bit Fantasy & Adventure (2025)/xDeviruchi - 16 bit Fantasy & Adventure (2025)/mp3/04 - Silent Forest.mp3" id="6_vtaks"]
 [ext_resource type="PackedScene" uid="uid://by6tpmwv73i12" path="res://scenes/hud.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemies/enemy_pool.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cdrqql6g8e2bv" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://cxtblputmevgr" path="res://scripts/game.gd" id="11_game"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 distance = -1.0
@@ -27,6 +30,7 @@ point_count = 6
 sources/2 = SubResource("TileSetScenesCollectionSource_vtaks")
 
 [node name="Node2D" type="Node2D" unique_id=2053608586]
+script = ExtResource("11_game")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1080516206]
 scroll_scale = Vector2(0.6, 0.6)
@@ -69,7 +73,8 @@ position = Vector2(-1, -51)
 shape = SubResource("WorldBoundaryShape2D_gee14")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=984932711]
-stream = ExtResource("2_yqjtg")
+stream = ExtResource("6_vtaks")
+volume_db = -15.509
 autoplay = true
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=1842147751]
@@ -89,6 +94,7 @@ autostart = true
 [node name="PauseMenu" parent="." unique_id=1214514540 instance=ExtResource("10_vtaks")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
+visible = false
 tile_set = SubResource("TileSet_vtaks")
 
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]

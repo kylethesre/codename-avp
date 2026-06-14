@@ -6,19 +6,19 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_auphx"]
 atlas = ExtResource("1_cc5sp")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4b1q"]
 atlas = ExtResource("1_cc5sp")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4j5f3"]
 atlas = ExtResource("1_cc5sp")
-region = Rect2(32, 0, 16, 16)
+region = Rect2(32, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1p8c4"]
 atlas = ExtResource("1_cc5sp")
-region = Rect2(48, 0, 16, 16)
+region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oj63r"]
 animations = [{
@@ -36,7 +36,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_1p8c4")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walk_side",
 "speed": 5.0
 }]
 
@@ -51,7 +51,8 @@ stats = ExtResource("2_auphx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=532034382]
 sprite_frames = SubResource("SpriteFrames_oj63r")
-frame_progress = 0.7902507
+animation = &"walk_side"
+autoplay = "walk_side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=40411708]
 shape = SubResource("CircleShape2D_dwvi0")

@@ -71,3 +71,4 @@ func shoot() -> void:
 		# Configure bullet collision filters
 		bullet.collision_mask = 0
 		bullet.set_collision_mask_value(target_layer, true)
+		

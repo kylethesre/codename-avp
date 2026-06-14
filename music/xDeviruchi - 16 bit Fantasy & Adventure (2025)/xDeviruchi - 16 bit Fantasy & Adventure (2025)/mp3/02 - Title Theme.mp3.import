@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dq6fdit7ed7bs"
+path="res://.godot/imported/02 - Title Theme.mp3-81c9f895122b715f63ab99e5494a403a.mp3str"
+
+[deps]
+
+source_file="res://music/xDeviruchi - 16 bit Fantasy & Adventure (2025)/xDeviruchi - 16 bit Fantasy & Adventure (2025)/mp3/02 - Title Theme.mp3"
+dest_files=["res://.godot/imported/02 - Title Theme.mp3-81c9f895122b715f63ab99e5494a403a.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

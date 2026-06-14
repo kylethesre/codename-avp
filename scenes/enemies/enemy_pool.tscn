@@ -2,9 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://cvopnqkqf1pni" path="res://scenes/enemies/beatle.tscn" id="2_2o5xi"]
 [ext_resource type="PackedScene" uid="uid://c85ouliehxjhs" path="res://scenes/snake.tscn" id="2_72rqm"]
+[ext_resource type="PackedScene" uid="uid://dtbc0eheowrlr" path="res://scenes/bear.tscn" id="3_2o5xi"]
 
 [node name="EnemyPool" type="Node2D" unique_id=1161567536]
 
 [node name="Snake" parent="." unique_id=165947573 instance=ExtResource("2_72rqm")]
 
 [node name="Beatle" parent="." unique_id=115423585 instance=ExtResource("2_2o5xi")]
+
+[node name="Bear" parent="." unique_id=534435115 instance=ExtResource("3_2o5xi")]
+position = Vector2(10.918175, -1.1917915)

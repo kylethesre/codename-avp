@@ -45,6 +45,12 @@ func spawn_random_enemy() -> void:
 	
 	# Loop through available_enemies and try to spawn each one based on its waves value(spawn chance)
 	for Enemy in available_enemies:
+		
+		#Does this enemy have data for the current wave?
+		if Enemy.stats.waves.size() < current_wave:
+			push_warning("Skipping " + Enemy.name + ": No wave data for wave " + str(current_wave))
+			continue # This skips to the next enemy in the loop!
+			
 		var random_dice_roll: int = randi_range(1, 100)
 		# 2. Check if current selected enemy can be spawned.
 		# 2.5 Also slow spawning if there are too many enemies on the board.
