@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://54bd8sgvx10i"
+path="res://.godot/imported/05 - Battle 1.mp3-ad544d61b7bc8ac6443fd54f35b622e2.mp3str"
+
+[deps]
+
+source_file="res://music/xDeviruchi - 16 bit Fantasy & Adventure (2025)/xDeviruchi - 16 bit Fantasy & Adventure (2025)/mp3/05 - Battle 1.mp3"
+dest_files=["res://.godot/imported/05 - Battle 1.mp3-ad544d61b7bc8ac6443fd54f35b622e2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

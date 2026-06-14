@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d4dyhhacyucsg"
+path="res://.godot/imported/18 - Never Give Up.mp3-4d7376bdbbcc55ecb2bc51264f9b8289.mp3str"
+
+[deps]
+
+source_file="res://music/xDeviruchi - 16 bit Fantasy & Adventure (2025)/xDeviruchi - 16 bit Fantasy & Adventure (2025)/mp3/18 - Never Give Up.mp3"
+dest_files=["res://.godot/imported/18 - Never Give Up.mp3-4d7376bdbbcc55ecb2bc51264f9b8289.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

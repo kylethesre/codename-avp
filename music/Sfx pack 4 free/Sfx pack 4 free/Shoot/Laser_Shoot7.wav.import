@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c5yys3uuylpy7"
+path="res://.godot/imported/Laser_Shoot7.wav-ce46ca5f2b9903a03f541d18882fc937.sample"
+
+[deps]
+
+source_file="res://music/Sfx pack 4 free/Sfx pack 4 free/Shoot/Laser_Shoot7.wav"
+dest_files=["res://.godot/imported/Laser_Shoot7.wav-ce46ca5f2b9903a03f541d18882fc937.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

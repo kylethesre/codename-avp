@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cmyl6vijpooa0"
+path="res://.godot/imported/07 - Port Town.mp3-1a613560408c4c24d6e43ea6e33d02c2.mp3str"
+
+[deps]
+
+source_file="res://music/xDeviruchi - 16 bit Fantasy & Adventure (2025)/xDeviruchi - 16 bit Fantasy & Adventure (2025)/mp3/07 - Port Town.mp3"
+dest_files=["res://.godot/imported/07 - Port Town.mp3-1a613560408c4c24d6e43ea6e33d02c2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

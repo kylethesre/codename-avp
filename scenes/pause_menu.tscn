@@ -38,6 +38,13 @@ func _on_volume_slider_value_changed(value: float) -> void:
 	var bus_index = AudioServer.get_bus_index(\"Master\")
 	#Convert 0-1 slider into decibels
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+
+
+func _on_sfx_value_changed(value: float) -> void:
+	#Find ID for SFX audio channel
+	var bus_index = AudioServer.get_bus_index(\"SFX\")
+	#Convert 0-1 slider into decibels
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 "
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1214514540]
@@ -46,9 +53,9 @@ script = SubResource("GDScript_oofok")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1915447167]
 anchors_preset = -1
-offset_left = 462.0
-offset_top = 266.0
-offset_right = 741.0
+offset_left = 416.0
+offset_top = 203.0
+offset_right = 800.0
 offset_bottom = 412.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -76,7 +83,7 @@ text = "Resume"
 layout_mode = 2
 text = "Quit"
 
-[node name="Label" type="Label" parent="ColorRect/VBoxContainer" unique_id=1095132623]
+[node name="Master Volume" type="Label" parent="ColorRect/VBoxContainer" unique_id=1095132623]
 layout_mode = 2
 text = "Master Volume"
 
@@ -86,6 +93,17 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
+[node name="SFX Volume" type="Label" parent="ColorRect/VBoxContainer" unique_id=1822889295]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFX" type="HSlider" parent="ColorRect/VBoxContainer" unique_id=183202320]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
 [connection signal="pressed" from="ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="ColorRect/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/SFX" to="." method="_on_sfx_value_changed"]

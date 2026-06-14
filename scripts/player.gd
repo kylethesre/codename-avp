@@ -10,8 +10,8 @@ var health: int = 4
 
 signal health_changed(health: int, max_health: int)
 
-# --- WE MOVED THIS HERE ---
-# It is best practice to keep your node references at the top!
+
+# Node references
 @onready var animated_sprite = $AnimatedSprite2D
 
 func take_damage(amount: int = 1):
@@ -68,6 +68,7 @@ func _physics_process(delta: float) -> void:
 
 #Knockback feature
 func trigger_radial_knockback():
+
 	var pulse_radius = 75.0
 	var max_knockback_force = 800.0
 	
