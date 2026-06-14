@@ -61,4 +61,5 @@ func spawn_random_enemy() -> void:
 			
 
 func _on_wave_timer_timeout() -> void:
+	print(current_wave)
 	current_wave += 1

@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://ddqx561hibqra" path="res://scenes/hud.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemy_pool.tscn" id="7_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://c85ouliehxjhs" path="res://scenes/snake.tscn" id="8_gee14"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
 radius = 160.00313
@@ -103,12 +102,9 @@ enemy_pool_scene = ExtResource("7_u5sy4")
 
 [node name="WaveTimer" type="Timer" parent="EnemySpawner" unique_id=689960714]
 wait_time = 60.0
+autostart = true
 
 [node name="Timer" type="Timer" parent="EnemySpawner" unique_id=74531]
-
-[node name="Snake" parent="." unique_id=165947573 groups=["enemies"] instance=ExtResource("8_gee14")]
-position = Vector2(-53, -39)
-collision_layer = 2
 
 [node name="HUD" parent="." unique_id=167591975 instance=ExtResource("7_gee14")]
 
