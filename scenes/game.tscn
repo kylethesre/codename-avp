@@ -112,6 +112,7 @@ autostart = true
 [node name="PauseMenu" parent="." unique_id=1214514540 instance=ExtResource("10_vtaks")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
+visible = false
 tile_set = SubResource("TileSet_vtaks")
 
 [connection signal="timeout" from="CharacterBody2D/Basic Gun1/Cooldown" to="CharacterBody2D/Basic Gun1" method="_on_cooldown_timeout"]

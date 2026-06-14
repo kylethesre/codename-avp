@@ -12,6 +12,8 @@ var player: Node2D = null
 var knockback_velocity = Vector2.ZERO
 @export var friction = 500.0
 
+#Get reference for animated sprite
+@onready var animated_sprite = $AnimatedSprite2D
 
 func _ready() -> void:
 	# Initialize health using the resource data
@@ -30,6 +32,7 @@ func _physics_process(_delta: float) -> void:
 	if knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
 		move_and_slide()
+		
 		#reduce knockback over time
 		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, friction * _delta)
 	#if no knockback
@@ -39,6 +42,28 @@ func _physics_process(_delta: float) -> void:
 		# 3. Use the speed value stored inside our resource!
 		velocity = direction * stats.speed
 		move_and_slide()
+		
+	#Call animation after calculating velocity	
+	update_animation()
+	
+	#Animated sprite flip code
+func update_animation() -> void:
+	#Check if the enemy is actually moving
+	if velocity.length() > 0:
+		#Play the walking animation
+		animated_sprite.play("walk_side")
+		
+		#Flip sprite horizontally if moving left (negative x velocity)
+		if velocity.x < 0:
+			animated_sprite.flip_h = true
+		#Un-flip the sprite if moving right (positive x velocity)
+		elif velocity.x > 0:
+			animated_sprite.flip_h = false
+	else:
+		#Stop the animation (or play an "idle" animation) if standing still
+		animated_sprite.stop()
+		
+			
 		#more knockback stuff
 func apply_knockback(force: Vector2) -> void:
 	print("Enemy ", name, " received knockback force: ", force) # Now this will work!
