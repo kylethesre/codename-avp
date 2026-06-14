@@ -3,7 +3,7 @@ extends Node2D
 @export var projectile_scene: PackedScene
 @export var damage: float = 10.0
 @export var target_layer: int = 3 # Layer 3 = Enemies, Layer 2 = Player
-
+@export var projectile_speed: float = 500
 @onready var cooldown_timer: Timer = $Cooldown
 @onready var radar: Area2D = $Radar
 
@@ -55,6 +55,9 @@ func _on_cooldown_timer_timeout() -> void:
 func shoot() -> void:
 	if projectile_scene:
 		var bullet = projectile_scene.instantiate()
+		
+		bullet.speed = projectile_speed
+		
 		get_tree().current_scene.add_child(bullet)
 		
 		# Spawn bullet at this component's exact position and rotation

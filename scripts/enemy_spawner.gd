@@ -42,7 +42,6 @@ func spawn_random_enemy() -> void:
 	
 	 # Compute the spawning graph and output a multiplyer based on it.
 	var curve_strength: float = 100 * spawn_rate_curve.sample_baked(get_tree().get_nodes_in_group('enemies').size())
-	print("Current Spawn rate is", curve_strength, "----", get_tree().get_nodes_in_group('enemies').size())
 	
 	# Loop through available_enemies and try to spawn each one based on its waves value(spawn chance)
 	for Enemy in available_enemies:

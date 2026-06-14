@@ -68,6 +68,7 @@ script = ExtResource("4_jmh3t")
 projectile_scene = ExtResource("5_1u11n")
 damage = 1.0
 target_layer = 2
+projectile_speed = 200.0
 
 [node name="Cooldown" type="Timer" parent="Basic Gun2" unique_id=2026269643]
 wait_time = 2.0
