@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dmfiwc4mtehoi"]
+
+[ext_resource type="Texture2D" uid="uid://b8vswiwj4k27c" path="res://assets/Forest&&Moon Pixel Art/Preview/BackGround.png" id="1_l6cm7"]
+
+[sub_resource type="GDScript" id="GDScript_ekxnf"]
+script/source = "extends Control
+
+#Connect the start button to the function
+
+
+
+func _on_start_pressed() -> void:
+	print(\"Start Button Pressed\")
+	#Exact path to game level
+	get_tree().change_scene_to_file(\"res://scenes/game.tscn\")
+"
+
+[sub_resource type="SystemFont" id="SystemFont_l6cm7"]
+font_names = PackedStringArray("Fantasy")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
+font = SubResource("SystemFont_l6cm7")
+font_size = 71
+stacked_outline_count = 1
+stacked_outline_0/size = 6
+stacked_outline_0/color = Color(0.18954381, 0.51065314, 0.39621863, 1)
+
+[node name="MainMenu" type="Control" unique_id=873358167]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_ekxnf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1970683659]
+layout_mode = 0
+offset_left = -567.0
+offset_top = -320.0
+offset_right = 577.0
+offset_bottom = 329.0
+texture = ExtResource("1_l6cm7")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=225093920]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = 208.0
+offset_right = 147.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Start" type="Button" parent="VBoxContainer" unique_id=1685422287]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Start"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1678586225]
+layout_mode = 0
+offset_left = -263.0
+offset_top = -122.0
+offset_right = 237.0
+offset_bottom = -58.0
+
+[node name="Label" type="Label" parent="VBoxContainer2" unique_id=871486088]
+layout_mode = 2
+text = "Kitty Meow Game"
+label_settings = SubResource("LabelSettings_ekxnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
