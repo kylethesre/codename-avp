@@ -31,6 +31,13 @@ func _on_quit_button_pressed() -> void:
 	get_tree().paused = false
 	#load main menu scene
 	get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
+
+
+func _on_volume_slider_value_changed(value: float) -> void:
+	#Find ID for main audio channel
+	var bus_index = AudioServer.get_bus_index(\"Master\")
+	#Convert 0-1 slider into decibels
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 "
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1214514540]
@@ -39,10 +46,10 @@ script = SubResource("GDScript_oofok")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1915447167]
 anchors_preset = -1
-offset_left = 477.0
-offset_top = 270.0
-offset_right = 710.0
-offset_bottom = 381.0
+offset_left = 462.0
+offset_top = 266.0
+offset_right = 741.0
+offset_bottom = 412.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.21176471, 0.25882354, 0.20784314, 1)
@@ -55,9 +62,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -102.0
-offset_top = -31.5
-offset_right = 98.0
-offset_bottom = 34.5
+offset_top = -55.0
+offset_right = 101.5
+offset_bottom = 58.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -69,5 +76,16 @@ text = "Resume"
 layout_mode = 2
 text = "Quit"
 
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer" unique_id=1095132623]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="ColorRect/VBoxContainer" unique_id=1923998071]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
 [connection signal="pressed" from="ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

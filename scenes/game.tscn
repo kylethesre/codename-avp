@@ -26,6 +26,11 @@ _limits = [0.0, 1.0, 0.0, 150.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.49532712, 1), 0.0, 0.0, 0, 0, Vector2(58.8785, 0.92134833), -0.0070375423, -0.0070375423, 0, 0, Vector2(75.700935, 0.49438208), -0.025310466, -0.025310466, 0, 0, Vector2(100.23364, 0.078651786), -0.00854931, -0.00854931, 0, 0, Vector2(124.76635, 0), 0.0, 0.0, 0, 0]
 point_count = 6
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vtaks"]
+
+[sub_resource type="TileSet" id="TileSet_vtaks"]
+sources/2 = SubResource("TileSetScenesCollectionSource_vtaks")
+
 [node name="Node2D" type="Node2D" unique_id=2053608586]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1080516206]
@@ -74,8 +79,6 @@ shape = SubResource("CircleShape2D_dinhu")
 wait_time = 0.8
 one_shot = true
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
-
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1177873918]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=923093964]
@@ -107,6 +110,9 @@ autostart = true
 [node name="HUD" parent="." unique_id=167591975 instance=ExtResource("7_gee14")]
 
 [node name="PauseMenu" parent="." unique_id=1214514540 instance=ExtResource("10_vtaks")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
+tile_set = SubResource("TileSet_vtaks")
 
 [connection signal="timeout" from="CharacterBody2D/Basic Gun1/Cooldown" to="CharacterBody2D/Basic Gun1" method="_on_cooldown_timeout"]
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]

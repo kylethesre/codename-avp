@@ -27,8 +27,18 @@ func _input(event: InputEvent) -> void:
 		health_changed.emit(health, max_health)
 
 func _physics_process(delta: float) -> void:
-	# Get the input direction and handle the movement/deceleration.
-	var direction_vector := Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
+	
+	
+	# Get the input direction and handle the movement/deceleration. WASD code in comments below if needed.
+	#var direction_vector := Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
+	
+	
+	# Get the input direction and handle the movement
+	var direction_vector := Vector2(
+		Input.get_axis("move_left", "move_right"), 
+		Input.get_axis("move_up", "move_down")
+	)
+	
 	var normalized_direction := direction_vector.normalized()
 	
 	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 500 * delta)
