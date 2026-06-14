@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://by6tpmwv73i12" path="res://scenes/hud.tscn" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://ddqx561hibqra" path="res://scenes/hud.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemy_pool.tscn" id="7_u5sy4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
@@ -80,7 +80,6 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=923093964]
 position = Vector2(1, 484)
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
-disabled = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1622155924]
 
