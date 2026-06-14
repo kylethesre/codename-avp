@@ -8,6 +8,11 @@ var current_health: float
 
 var player: Node2D = null
 
+#Character knockback
+var knockback_velocity = Vector2.ZERO
+@export var friction = 500.0
+
+
 func _ready() -> void:
 	# Initialize health using the resource data
 	if stats:
@@ -20,13 +25,24 @@ func _ready() -> void:
 		player = players[0]
 
 func _physics_process(_delta: float) -> void:
-	if player and stats:
+	#if knockback
+	
+	if knockback_velocity != Vector2.ZERO:
+		velocity = knockback_velocity
+		move_and_slide()
+		#reduce knockback over time
+		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, friction * _delta)
+	#if no knockback
+	elif player and stats:
 		var direction = (player.global_position - global_position).normalized()
 		
 		# 3. Use the speed value stored inside our resource!
 		velocity = direction * stats.speed
 		move_and_slide()
-
+		#more knockback stuff
+func apply_knockback(force: Vector2) -> void:
+	print("Enemy ", name, " received knockback force: ", force) # Now this will work!
+	knockback_velocity = force
 ## A quick function showing how armor and health interact
 func take_damage(amount: float) -> void:
 	if not stats: return

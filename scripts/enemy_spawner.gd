@@ -53,3 +53,4 @@ func spawn_random_enemy() -> void:
 	# 5. Position and spawn the enemy into the main world
 	enemy_instance.global_position = spawn_position
 	get_parent().add_child(enemy_instance)
+	enemy_instance.add_to_group("enemies")
