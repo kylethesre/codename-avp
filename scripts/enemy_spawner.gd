@@ -50,11 +50,15 @@ func spawn_random_enemy() -> void:
 	# 1. Get all the enemy templates inside the pool scene
 	var available_enemies = pool_instance.get_children()
 	
-	 # Compute the spawning graph and output a multiplyer based on it.
-	var curve_strength: float = 100 * spawn_rate_curve.sample_baked(get_tree().get_nodes_in_group('enemies').size())
-	
 	# Loop through available_enemies and try to spawn each one based on its waves value(spawn chance)
 	for Enemy in available_enemies:
+		
+		var type_count = 0
+		for e in get_tree().get_nodes_in_group("enemies"):
+			if e.has_meta("enemy_type") and e.get_meta("enemy_type") == Enemy.name:
+				type_count += 1
+				
+		var curve_strength: float = 100 * spawn_rate_curve.sample_baked(type_count)
 		
 		var spawn_chance: float = 0.0
 		var max_defined_waves = Enemy.stats.waves.size()
@@ -76,6 +80,7 @@ func spawn_random_enemy() -> void:
 			
 			# 3. Duplicate it so we don't steal the original template
 			var enemy_instance = Enemy.duplicate() as Node2D
+			enemy_instance.set_meta("enemy_type", Enemy.name)
 			
 			# 4. Calculate a random position on a circle around the player
 			var random_angle = randf_range(0, 2 * PI)

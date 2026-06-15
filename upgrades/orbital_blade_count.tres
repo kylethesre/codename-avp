@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://cvfvahw5yorj0"]
+
+[ext_resource type="Script" uid="uid://cbaspi18oo6xg" path="res://scripts/Upgrade.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/abilities/orbital_blade_count.tscn" id="2"]
+
 [resource]
 script = ExtResource("1")
 id = "orbital_blade_count"
 ability = ExtResource("2")
-weight = 100
-max_instances = 4
+max_instances = 8
 prerequisites = Array[String](["orbital_blades"])
-mutually_exclusive = Array[String]([])
 rarity = 1
 name = "Additional Blade"
 desc = "(Orbital) Adds +1 spinning orbital blade."
-is_ability = false

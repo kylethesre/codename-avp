@@ -26,24 +26,40 @@ func _on_timeout():
 	if valid.is_empty(): return
 	
 	var target = valid[randi() % valid.size()]
-	_strike(target)
+	_execute_strike(target, valid)
 	
 	if double_strike:
-		get_tree().create_timer(0.3).timeout.connect(func(): if is_instance_valid(target): _strike(target))
+		var valid_targets = valid.duplicate()
+		valid_targets.erase(target)
+		var target2 = target
+		if valid_targets.size() > 0:
+			target2 = valid_targets[randi() % valid_targets.size()]
+			
+		get_tree().create_timer(0.3).timeout.connect(func():
+			var current_enemies = get_tree().get_nodes_in_group("enemies")
+			var valid_now = []
+			for e in current_enemies:
+				if is_instance_valid(e): valid_now.append(e)
+			if is_instance_valid(target2):
+				_execute_strike(target2, valid_now)
+		)
+
+func _execute_strike(initial_target: Node2D, valid_enemies: Array):
+	if not is_instance_valid(initial_target): return
+	_strike(initial_target)
 	
-	var struck = [target]
-	
+	var struck = [initial_target]
 	for i in range(chain_count):
 		var next_closest = null
 		var min_d = INF
-		for e in valid:
-			if not struck.has(e):
+		for e in valid_enemies:
+			if is_instance_valid(e) and not struck.has(e):
 				var d = struck[-1].global_position.distance_to(e.global_position)
 				if d < 150.0 and d < min_d:
 					min_d = d
 					next_closest = e
 		if next_closest:
-			_strike(next_closest)
+			get_tree().create_timer(0.1 * (i + 1)).timeout.connect(func(): if is_instance_valid(next_closest): _strike(next_closest))
 			struck.append(next_closest)
 
 func _strike(target: Node2D):
