@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://d3mcyyxw3fmdr" path="res://scenes/enemies/enemy_pool.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cdrqql6g8e2bv" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cxtblputmevgr" path="res://scripts/game.gd" id="11_game"]
+[ext_resource type="PackedScene" uid="uid://bw78pig260uqp" path="res://scenes/game_over_menu.tscn" id="11_kvpfn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
+radius = 160.00313
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 distance = -1.0
@@ -92,6 +96,8 @@ autostart = true
 [node name="HUD" parent="." unique_id=167591975 instance=ExtResource("7_gee14")]
 
 [node name="PauseMenu" parent="." unique_id=1214514540 instance=ExtResource("10_vtaks")]
+
+[node name="GameOverMenu" parent="." unique_id=766885458 instance=ExtResource("11_kvpfn")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
 visible = false

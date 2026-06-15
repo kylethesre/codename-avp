@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bw78pig260uqp"]
+
+[sub_resource type="GDScript" id="GDScript_tg6a4"]
+script/source = "extends CanvasLayer
+
+func _ready() -> void:
+	hide() # Hide it by default
+
+func show_game_over():
+	show()
+	get_tree().paused = true # Optional: pause the game
+
+
+
+func _on_restart_pressed() -> void:
+	print(\"Restart button clicked!\") # This will tell us if the button is working
+	get_tree().paused = false
+	get_tree().change_scene_to_file(\"res://scenes/game.tscn\") # level path
+"
+
+[sub_resource type="SystemFont" id="SystemFont_14ib6"]
+font_names = PackedStringArray("Fantasy")
+subpixel_positioning = 0
+
+[node name="GameOverMenu" type="CanvasLayer" unique_id=766885458]
+script = SubResource("GDScript_tg6a4")
+
+[node name="TextureRect" type="ColorRect" parent="." unique_id=90947475]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -104.0
+offset_right = 107.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.21176471, 0.25882354, 0.20784314, 1)
+
+[node name="Control" type="Control" parent="TextureRect" unique_id=664632715]
+anchors_preset = 0
+offset_right = 11.0
+offset_bottom = 32.0
+
+[node name="Label" type="Label" parent="TextureRect/Control" unique_id=134243105]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 9.0
+offset_right = 194.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(0.8560673, 0.8560673, 0.85606724, 1)
+theme_override_fonts/font = SubResource("SystemFont_14ib6")
+theme_override_font_sizes/font_size = 38
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="TextureRect/Control" unique_id=1917607857]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 112.0
+offset_right = 147.0
+offset_bottom = 143.0
+text = "Restart"
+
+[connection signal="pressed" from="TextureRect/Control/Restart" to="." method="_on_restart_pressed"]

@@ -2,14 +2,11 @@ extends CharacterBody2D
 class_name Player
 
 const SPEED = 200.0
-
 var knockback_velocity = Vector2.ZERO
-
 var health: int = 4
 @export var max_health: int = 4
 
 signal health_changed(health: int, max_health: int)
-
 
 # Node references
 @onready var animated_sprite = $AnimatedSprite2D
@@ -17,6 +14,21 @@ signal health_changed(health: int, max_health: int)
 func take_damage(amount: int = 1):
 	health -= amount
 	health_changed.emit(health, max_health)
+	
+	# --- ADDED LOGIC START ---
+	if health <= 0:
+		health = 0
+		trigger_game_over()
+	# --- ADDED LOGIC END ---
+
+# --- ADDED FUNCTION AT THE BOTTOM ---
+func trigger_game_over():
+	var game_over_screen = get_tree().current_scene.get_node_or_null("GameOverMenu")
+	if game_over_screen:
+		game_over_screen.show_game_over()
+	else:
+		print("Error: GameOverMenu node not found in current scene!")
+# ------------------------------------
 
 func _ready() -> void:
 	health_changed.emit(health, max_health)
