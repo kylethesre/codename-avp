@@ -281,6 +281,7 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1662778846]
 collision_layer = 2
 script = ExtResource("1_rkhd4")
+max_health = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1074439609]
 position = Vector2(-0.5, 2.5)
