@@ -6,6 +6,7 @@ var player: Node2D = null
 var wave_text: Node
 
 func _ready() -> void:
+	UpgradeManager.reset()
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
@@ -24,7 +25,7 @@ func _ready() -> void:
 func _on_wave_started(wave: int) -> void:
 	print("Game: Wave started signal received ", wave)
 	wave_text.text = "wave %d" % wave
-	UpgradeManager.show_upgrade_selection(3)
+	UpgradeManager.show_upgrade_selection(3, wave)
 
 func _process(delta: float) -> void:
 	if not player: return

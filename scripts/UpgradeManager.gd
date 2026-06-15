@@ -15,6 +15,9 @@ func _ready() -> void:
 	load_all_upgrades()
 	_instantiate_ui()
 
+func reset() -> void:
+	obtained_upgrades.clear()
+
 	# Find player node for applying upgrades
 	player = get_parent().get_node("CharacterBody2D") as Player
 	if not player:
@@ -57,10 +60,10 @@ func load_all_upgrades() -> void:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 
-func show_upgrade_selection(count: int = 3) -> void:
+func show_upgrade_selection(count: int = 3, wave: int = 1) -> void:
 	if not ui:
 		_instantiate_ui()
-	var choices: Array[Upgrade] = _pick_random_upgrades(count)
+	var choices: Array[Upgrade] = _pick_random_upgrades(count, wave)
 	print("UpgradeManager: ", choices.size(), " choices available")
 	print("UpgradeManager: all_upgrades count = ", all_upgrades.size())
 	print("UpgradeManager: obtained = ", obtained_upgrades)
@@ -70,8 +73,8 @@ func show_upgrade_selection(count: int = 3) -> void:
 	else:
 		print("UpgradeManager: WARNING - ui is null!")
 
-func _pick_random_upgrades(count: int) -> Array[Upgrade]:
-	var is_first_shop = obtained_upgrades.is_empty()
+func _pick_random_upgrades(count: int, wave: int = 1) -> Array[Upgrade]:
+	var is_first_shop = (wave == 1)
 	var filtered: Array[Upgrade] = []
 	for u in all_upgrades:
 		if is_first_shop and not u.is_ability:
