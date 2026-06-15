@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/fork.tscn" id="2_fork"]
+
+[resource]
+script = ExtResource("1")
+id = "fork"
+ability = ExtResource("2_fork")
+weight = 40
+max_instances = 4
+prerequisites = []
+mutually_exclusive = []
+rarity = 2
+name = "Forking Shots"
+desc = "Projectiles split into 2 upon hitting an enemy (if not piercing)"
+is_ability = false

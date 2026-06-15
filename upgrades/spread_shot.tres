@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/spread_shot.tscn" id="2_ss"]
 
 [resource]
 script = ExtResource("1")
 id = "spread_shot"
-ability = null
+ability = ExtResource("2_ss")
 weight = 50
 max_instances = 1
 prerequisites = ["double_shot"]

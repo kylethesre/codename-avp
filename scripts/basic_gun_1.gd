@@ -4,6 +4,12 @@ extends Node2D
 @export var damage: float = 10.0
 @export var target_layer: int = 3 # Layer 3 = Enemies, Layer 2 = Player
 @export var projectile_speed: float = 500
+@export var projectiles_per_shot: int = 1
+@export var spread_angle_degrees: float = 0.0
+
+var is_explosive: bool = false
+var pierce_amount: int = 0
+var fork_depth: int = 0
 @onready var cooldown_timer: Timer = $Cooldown
 @onready var radar: Area2D = $Radar
 
@@ -54,21 +60,30 @@ func _on_cooldown_timer_timeout() -> void:
 
 func shoot() -> void:
 	if projectile_scene:
-		var bullet = projectile_scene.instantiate()
+		var angles = []
+		if projectiles_per_shot == 1:
+			angles.append(0.0)
+		else:
+			var start_angle = -spread_angle_degrees / 2.0
+			var step_angle = spread_angle_degrees / float(projectiles_per_shot - 1)
+			for i in range(projectiles_per_shot):
+				angles.append(start_angle + (step_angle * i))
 		
-		bullet.speed = projectile_speed
-		
-		get_tree().current_scene.add_child(bullet)
-		
-		# Spawn bullet at this component's exact position and rotation
-		bullet.global_position = global_position
-		bullet.global_rotation = global_rotation
-		
-		# Set bullet data properties
-		bullet.creator = owner 
-		bullet.damage = damage
-		
-		# Configure bullet collision filters
-		bullet.collision_mask = 0
-		bullet.set_collision_mask_value(target_layer, true)
+		for angle_deg in angles:
+			var bullet = projectile_scene.instantiate()
+			bullet.speed = projectile_speed
+			get_tree().current_scene.add_child(bullet)
+			
+			bullet.global_position = global_position
+			bullet.global_rotation = global_rotation + deg_to_rad(angle_deg)
+			
+			bullet.creator = owner 
+			bullet.damage = damage
+			
+			bullet.is_explosive = is_explosive
+			bullet.pierce_remaining = pierce_amount
+			bullet.fork_remaining = fork_depth
+			
+			bullet.collision_mask = 0
+			bullet.set_collision_mask_value(target_layer, true)
 		

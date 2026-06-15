@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://fork_ability"]
+[ext_resource type="Script" path="res://scripts/fork.gd" id="1"]
+[node name="Fork" type="Node"]
+script = ExtResource("1")

@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bq46cdiwnuxe5" path="res://scenes/background.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dtf5v77dx3dvt" path="res://scenes/character.tscn" id="2_lnu2h"]
-[ext_resource type="Texture2D" uid="uid://cv1vbvnynxjgt" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01.png" id="2_p57ef"]
+[ext_resource type="Texture2D" uid="uid://c7sg43pf5sm5l" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01_Background.png" id="3_vtaks"]
+[ext_resource type="Texture2D" uid="uid://cavl8rocd03ho" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01_Grass_Top.png" id="4_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://bsobu5s57si73" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01_Grass_Bottom.png" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
 [ext_resource type="AudioStream" uid="uid://gbxl2rg86qdl" path="res://music/xDeviruchi - 16 bit Fantasy & Adventure (2025)/xDeviruchi - 16 bit Fantasy & Adventure (2025)/mp3/04 - Silent Forest.mp3" id="6_vtaks"]
 [ext_resource type="PackedScene" uid="uid://by6tpmwv73i12" path="res://scenes/hud.tscn" id="7_gee14"]
@@ -31,23 +33,52 @@ sources/2 = SubResource("TileSetScenesCollectionSource_vtaks")
 [node name="Node2D" type="Node2D" unique_id=2053608586]
 script = ExtResource("11_game")
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1080516206]
-scroll_scale = Vector2(0.6, 0.6)
+[node name="Parallax2D Trees" type="Parallax2D" parent="." unique_id=1169755589]
+scroll_scale = Vector2(0.6, 1)
 repeat_size = Vector2(640, 0)
 repeat_times = 3
 
-[node name="Background" parent="Parallax2D" unique_id=575990805 instance=ExtResource("1_iywne")]
+[node name="Background" parent="Parallax2D Trees" unique_id=575990805 instance=ExtResource("1_iywne")]
 y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(-21, -86)
 scale = Vector2(2.0375001, 2.8666668)
-texture = ExtResource("2_p57ef")
+texture = ExtResource("3_vtaks")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Parallax2D Grass Top" type="Parallax2D" parent="." unique_id=1080516206]
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Background" parent="Parallax2D Grass Top" unique_id=1121867924 instance=ExtResource("1_iywne")]
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-21, -86)
+scale = Vector2(2.0375001, 2.8666668)
+texture = ExtResource("4_kvpfn")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Parallax2D Grass Bottom" type="Parallax2D" parent="." unique_id=1326760577]
+scroll_offset = Vector2(0, 688)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Background" parent="Parallax2D Grass Bottom" unique_id=199018741 instance=ExtResource("1_iywne")]
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-21, -86)
+scale = Vector2(2.0375001, 2.8666668)
+texture = ExtResource("5_kvpfn")
 centered = false
 metadata/_edit_lock_ = true
 
 [node name="CharacterBody2D" parent="." unique_id=1662778846 groups=["Player"] instance=ExtResource("2_lnu2h")]
-position = Vector2(22, 6)
+position = Vector2(0, 282)
 collision_mask = 7
 motion_mode = 1
 
@@ -60,6 +91,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1177873918]
+position = Vector2(-3, 601)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=923093964]
 position = Vector2(1, 484)
@@ -68,7 +100,7 @@ shape = SubResource("WorldBoundaryShape2D_uwrxv")
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1622155924]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=868610179]
-position = Vector2(-1, -51)
+position = Vector2(-1, 120)
 shape = SubResource("WorldBoundaryShape2D_gee14")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=984932711]

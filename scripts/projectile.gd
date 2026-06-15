@@ -1,16 +1,23 @@
 extends Area2D
 
-@export var speed: float = 500
-@export var damage: float = 1
-
 #Holds a reference to the Node that fired this bullet
-var creator: Node = null
+var creator: Node2D = null
+var damage: float = 10.0
+var speed: float = 400.0
+
+var is_explosive: bool = false
+var pierce_remaining: int = 0
+var fork_remaining: int = 0
+var hit_targets: Array[Node2D] = []
 
 #Grab the sound node right below your variables
 @onready var ability_sound = $AbilitySound
 
 #Add _ready function to play it immediately
 func _ready() -> void:
+	add_to_group("projectiles")
+	get_tree().create_timer(5.0).timeout.connect(queue_free)
+	
 	# Create a temporary AudioStreamPlayer2D
 	var temp_audio = AudioStreamPlayer2D.new()
 	temp_audio.stream = ability_sound.stream # Copy the sound file
@@ -26,12 +33,41 @@ func _physics_process(delta: float) -> void:
 	position += transform.x * speed * delta
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
-	queue_free()
+	pass # Disabled so projectiles can wrap around the screen
 
 func _on_body_entered(body: Node2D) -> void:
+	if body in hit_targets: return
+	
 	# Check if the object we hit has a method to take damage
 	if body.has_method("take_damage"):
+		hit_targets.append(body)
 		body.take_damage(damage)
-	
-	# Delete the bullet upon impact
-	queue_free()
+		
+		if is_explosive:
+			var expl = load("res://scenes/explosion.tscn").instantiate()
+			expl.global_position = global_position
+			expl.damage = damage
+			get_tree().current_scene.call_deferred("add_child", expl)
+			queue_free()
+			return
+			
+		if pierce_remaining > 0:
+			pierce_remaining -= 1
+		elif fork_remaining > 0:
+			fork_remaining -= 1
+			for angle in [-15, 15]:
+				var new_bullet = load(scene_file_path).instantiate()
+				new_bullet.global_position = global_position
+				new_bullet.global_rotation = global_rotation + deg_to_rad(angle)
+				new_bullet.damage = damage / 2.0
+				new_bullet.speed = speed
+				new_bullet.creator = creator
+				new_bullet.collision_mask = collision_mask
+				new_bullet.is_explosive = is_explosive
+				new_bullet.pierce_remaining = pierce_remaining
+				new_bullet.fork_remaining = fork_remaining
+				new_bullet.hit_targets = hit_targets.duplicate()
+				get_tree().current_scene.call_deferred("add_child", new_bullet)
+			queue_free()
+		else:
+			queue_free()

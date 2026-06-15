@@ -1,16 +1,17 @@
 [gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/vampire.tscn" id="2_vmp"]
 
 [resource]
 script = ExtResource("1")
 id = "vampire"
-ability = null
+ability = ExtResource("2_vmp")
 weight = 30
-max_instances = 1
+max_instances = 10
 prerequisites = []
 mutually_exclusive = []
 rarity = 2
 name = "Life Steal"
-desc = "Heal 1 HP on each kill"
+desc = "1% chance per level to heal 1 HP on kill"
 is_ability = false

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://triple_shot_ability"]
+[ext_resource type="Script" path="res://scripts/triple_shot.gd" id="1"]
+[node name="TripleShot" type="Node"]
+script = ExtResource("1")

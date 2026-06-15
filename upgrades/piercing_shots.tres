@@ -1,16 +1,17 @@
 [gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/piercing_shots.tscn" id="2_ps"]
 
 [resource]
 script = ExtResource("1")
 id = "piercing_shots"
-ability = null
+ability = ExtResource("2_ps")
 weight = 70
-max_instances = 1
+max_instances = 5
 prerequisites = []
 mutually_exclusive = []
 rarity = 1
 name = "Piercing Shots"
-desc = "Projectiles pierce through enemies"
+desc = "+1 pierce to projectiles"
 is_ability = false

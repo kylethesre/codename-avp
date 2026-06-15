@@ -101,4 +101,6 @@ func take_damage(amount: float) -> void:
 	print(name, " took ", final_damage, " damage. Health remaining: ", current_health)
 	
 	if current_health <= 0:
+		if player and player.has_signal("enemy_killed"):
+			player.enemy_killed.emit()
 		queue_free() # Enemy dies!

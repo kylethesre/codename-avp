@@ -1,19 +1,33 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED = 200.0
+var speed = 200.0
 var knockback_velocity = Vector2.ZERO
+var dodge_chance: float = 0.0
 var health: int = 4
 @export var max_health: int = 4
 
 signal health_changed(health: int, max_health: int)
+signal enemy_killed
 
 # Node references
 @onready var animated_sprite = $AnimatedSprite2D
 
 var is_hurt: bool = false
+const FloatingTextScene = preload("res://scenes/floating_text.tscn")
 
-func take_damage(amount: int = 1):
+func take_damage(amount: int = 1, source_pos: Vector2 = Vector2.ZERO):
+	if randf() < dodge_chance:
+		# Dodge successful!
+		var ft = FloatingTextScene.instantiate()
+		ft.global_position = global_position + Vector2(0, -20)
+		get_tree().current_scene.add_child(ft)
+		
+		# Still do knockback even if dodged
+		trigger_radial_knockback()
+		if source_pos != Vector2.ZERO:
+			knockback_velocity = (global_position - source_pos).normalized() * 100
+		return
 	health -= amount
 	health_changed.emit(health, max_health)
 	#added for hurt animation
@@ -21,6 +35,11 @@ func take_damage(amount: int = 1):
 	animated_sprite.play("Hurt")
 	await get_tree().create_timer(0.3).timeout # Adjust 0.3 to your animation length
 	is_hurt = false
+	
+	# Knockback always happens on damage
+	trigger_radial_knockback()
+	if source_pos != Vector2.ZERO:
+		knockback_velocity = (global_position - source_pos).normalized() * 100
 	
 	# --- ADDED LOGIC START ---
 	if health <= 0:
@@ -65,14 +84,14 @@ func _physics_process(delta: float) -> void:
 	var movement_velocity = Vector2.ZERO
 	
 	if direction_vector.length_squared() > 0.5:
-		movement_velocity = normalized_direction * SPEED
+		movement_velocity = normalized_direction * speed
 		
 		if movement_velocity.x != 0:
 			animated_sprite.flip_h = movement_velocity.x < 0
 		
 		velocity = movement_velocity + knockback_velocity
 	else:
-		velocity = velocity.move_toward(knockback_velocity, SPEED)
+		velocity = velocity.move_toward(knockback_velocity, speed)
 	
 	move_and_slide()
 	
@@ -80,16 +99,15 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		if collision.get_collider().is_in_group("enemies"):
 			if $Timer.is_stopped():
-				trigger_radial_knockback()
-				knockback_velocity = (global_position - collision.get_collider().global_position).normalized() * 100
-				take_damage()
+				take_damage(1, collision.get_collider().global_position)
 				$Timer.start()
 
 #Knockback feature
 func trigger_radial_knockback():
 
 	var pulse_radius = 75.0
-	var max_knockback_force = 800.0
+	# Set a reasonable max force to prevent launching
+	var max_knockback_force = 300.0 
 	
 	#Get every enemy in the entire game world
 	var all_enemies = get_tree().get_nodes_in_group("enemies")
@@ -103,7 +121,13 @@ func trigger_radial_knockback():
 		if distance <= pulse_radius:
 			
 			#Calculate falloff (closer = more power, further = less power)
-			var strength = clamp(1.0 - (distance / pulse_radius), 0.0, 1.0)
+			var linear_strength = clamp(1.0 - (distance / pulse_radius), 0.0, 1.0)
+			
+			# Flatten the curve significantly: 
+			# Enemies right next to you get 100% force, enemies at the edge get 50% force.
+			# This ensures a much more uniform push and stops close enemies from flying away
+			var strength = lerp(0.5, 1.0, linear_strength)
+			
 			var final_force = max_knockback_force * strength
 			
 			# 4. Apply the knockback
@@ -118,16 +142,6 @@ func _process(_delta):
 		return 
 	
 	# 2. Only if we are NOT hurt, do the movement animations
-	if velocity.length() > 0:
-		animated_sprite.play("Run")
-	else:
-		animated_sprite.play("Idle")
-		
-		# If we are hurt, we do NOT run the movement animation logic
-	if is_hurt:
-		return 
-
-	# Existing logic remains
 	if velocity.length() > 0:
 		animated_sprite.play("Run")
 	else:
