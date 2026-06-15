@@ -23,6 +23,3 @@ func _ready():
 	var tw = create_tween()
 	tw.tween_property(self, "modulate:a", 0.0, 0.3)
 	tw.tween_callback(queue_free)
-
-func _draw():
-	draw_circle(Vector2.ZERO, radius, Color(0.2, 0.8, 1.0, 0.6))

@@ -16,6 +16,10 @@ var bleed_ticks_remaining: int = 0
 var bleed_damage_per_tick: float = 0.0
 var bleed_timer: Timer
 
+var _cached_neighbors: Array = []
+var _neighbor_refresh_timer: float = 0.0
+const NEIGHBOR_REFRESH_INTERVAL: float = 0.2
+
 #Get reference for animated sprite
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -74,17 +78,22 @@ func _physics_process(_delta: float) -> void:
 		var direction = (player.global_position - global_position).normalized()
 		
 		# Calculate separation to avoid overlapping other enemies
-		var separation = Vector2.ZERO
-		var neighbors = get_tree().get_nodes_in_group("enemies")
-		var min_separation_dist = 24.0 # Adjust based on enemy sprite size
+		# Refresh neighbor cache periodically instead of every frame
+		_neighbor_refresh_timer -= _delta
+		if _neighbor_refresh_timer <= 0:
+			_neighbor_refresh_timer = NEIGHBOR_REFRESH_INTERVAL
+			_cached_neighbors = get_tree().get_nodes_in_group("enemies")
 		
-		for neighbor in neighbors:
+		var separation = Vector2.ZERO
+		var min_separation_dist = 24.0
+		
+		for neighbor in _cached_neighbors:
 			if neighbor == self or not is_instance_valid(neighbor):
 				continue
 			var diff = global_position - neighbor.global_position
-			var dist = diff.length()
-			if dist > 0 and dist < min_separation_dist:
-				# Push away strongly the closer they are
+			var dist_sq = diff.length_squared()
+			if dist_sq > 0 and dist_sq < min_separation_dist * min_separation_dist:
+				var dist = sqrt(dist_sq)
 				separation += diff.normalized() * (1.0 - (dist / min_separation_dist))
 		
 		var final_direction = (direction + separation * 1.5).normalized()
@@ -116,7 +125,6 @@ func update_animation() -> void:
 			
 		#more knockback stuff
 func apply_knockback(force: Vector2) -> void:
-	print("Enemy ", name, " received knockback force: ", force) # Now this will work!
 	knockback_velocity = force
 
 ## A quick function showing how armor and health interact
@@ -140,8 +148,6 @@ func take_damage(amount: float) -> void:
 	
 	ft.global_position = global_position + Vector2(randf_range(-10, 10), -20)
 	get_tree().current_scene.call_deferred("add_child", ft)
-	
-	print(name, " took ", final_damage, " damage. Health remaining: ", current_health)
 	
 	if current_health <= 0:
 		if player and player.has_signal("enemy_killed"):

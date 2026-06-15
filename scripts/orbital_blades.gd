@@ -7,7 +7,8 @@ extends Node2D
 
 var heavy_blades: bool = false
 var blades: Array = []
-var hit_cooldowns = {} 
+var hit_cooldowns = {}
+var knockback_cooldown: float = 0.0 
 
 func _ready():
 	_update_blades()
@@ -39,6 +40,9 @@ func _physics_process(delta):
 	rotation += speed * delta
 	var angle_step = PI * 2.0 / blade_count
 	
+	if knockback_cooldown > 0:
+		knockback_cooldown -= delta
+		
 	var keys = hit_cooldowns.keys()
 	for key in keys:
 		hit_cooldowns[key] -= delta
@@ -56,7 +60,8 @@ func _physics_process(delta):
 				if body.has_method("take_damage"):
 					body.take_damage(damage)
 					hit_cooldowns[body] = 0.5
-					if heavy_blades:
+					if heavy_blades and knockback_cooldown <= 0:
+						knockback_cooldown = 2.0
 						for e in get_tree().get_nodes_in_group("enemies"):
 							if is_instance_valid(e) and e.has_method("apply_knockback"):
 								var dist = e.global_position.distance_to(blades[i].global_position)

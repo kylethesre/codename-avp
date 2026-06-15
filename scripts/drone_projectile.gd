@@ -7,6 +7,7 @@ var is_explosive: bool = false
 var pierce_count: int = 0
 var hit_enemies: Array = []
 var target: Node2D = null
+var _retarget_cooldown: float = 0.0
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -20,7 +21,10 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_instance_valid(target):
-		_find_target()
+		_retarget_cooldown -= delta
+		if _retarget_cooldown <= 0:
+			_retarget_cooldown = 0.2
+			_find_target()
 		
 	if is_instance_valid(target):
 		var dir = (target.global_position - global_position).normalized()

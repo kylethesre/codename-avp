@@ -22,8 +22,8 @@ distance = -5.0
 
 [sub_resource type="Curve" id="Curve_0tnpc"]
 _limits = [0.0, 1.0, 0.0, 150.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.49532712, 1), 0.0, 0.0, 0, 0, Vector2(58.8785, 0.92134833), -0.0070375423, -0.0070375423, 0, 0, Vector2(75.700935, 0.49438208), -0.025310466, -0.025310466, 0, 0, Vector2(100.23364, 0.078651786), -0.00854931, -0.00854931, 0, 0, Vector2(124.76635, 0), 0.0, 0.0, 0, 0]
-point_count = 6
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(50, 1), 0.0, 0.0, 0, 0, Vector2(75, 0.5), 0.0, 0.0, 0, 0, Vector2(100, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vtaks"]
 

@@ -50,14 +50,17 @@ func spawn_random_enemy() -> void:
 	# 1. Get all the enemy templates inside the pool scene
 	var available_enemies = pool_instance.get_children()
 	
+	# Build type counts once for all enemy types
+	var type_counts = {}
+	for e in get_tree().get_nodes_in_group("enemies"):
+		if e.has_meta("enemy_type"):
+			var etype = e.get_meta("enemy_type")
+			type_counts[etype] = type_counts.get(etype, 0) + 1
+	
 	# Loop through available_enemies and try to spawn each one based on its waves value(spawn chance)
 	for Enemy in available_enemies:
 		
-		var type_count = 0
-		for e in get_tree().get_nodes_in_group("enemies"):
-			if e.has_meta("enemy_type") and e.get_meta("enemy_type") == Enemy.name:
-				type_count += 1
-				
+		var type_count = type_counts.get(Enemy.name, 0)
 		var curve_strength: float = 100 * spawn_rate_curve.sample_baked(type_count)
 		
 		var spawn_chance: float = 0.0
@@ -94,5 +97,4 @@ func spawn_random_enemy() -> void:
 
 func _on_wave_timer_timeout() -> void:
 	current_wave += 1
-	print("Wave ", current_wave, " started!")
 	emit_signal("wave_started", current_wave)

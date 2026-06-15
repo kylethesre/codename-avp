@@ -7,11 +7,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 40.0
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bolt"]
-size = Vector2(10, 300)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_impact"]
-size = Vector2(80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2j4yj"]
 atlas = ExtResource("2_0am4e")
@@ -92,14 +87,7 @@ script = ExtResource("1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=141545349]
 shape = SubResource("CircleShape2D_1")
 
-[node name="BoltSprite" type="Sprite2D" parent="." unique_id=1021389940]
-modulate = Color(1, 1, 0, 1)
-position = Vector2(0, -150)
-texture = SubResource("PlaceholderTexture2D_bolt")
 
-[node name="ImpactSprite" type="Sprite2D" parent="." unique_id=1482282047]
-modulate = Color(1, 1, 0, 0.5)
-texture = SubResource("PlaceholderTexture2D_impact")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1106659335]
 stream = ExtResource("2_s0l21")

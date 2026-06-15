@@ -11,6 +11,8 @@ var pierce_remaining: int = 0
 var fork_remaining: int = 0
 var hit_targets: Array[Node2D] = []
 
+const ExplosionScene = preload("res://scenes/explosion.tscn")
+
 #Grab the sound node right below your variables
 @onready var ability_sound = $AbilitySound
 
@@ -48,7 +50,7 @@ func _on_body_entered(body: Node2D) -> void:
 			pierce_remaining -= 1
 		else:
 			if is_explosive:
-				var expl = load("res://scenes/explosion.tscn").instantiate()
+				var expl = ExplosionScene.instantiate()
 				expl.global_position = global_position
 				expl.damage = explosion_damage
 				get_tree().current_scene.call_deferred("add_child", expl)

@@ -34,12 +34,12 @@ func reset() -> void:
 
 
 func _instantiate_ui() -> void:
-	print("UpgradeManager: _instantiate_ui() called")
+
 	var ui_scene: PackedScene = ResourceLoader.load(ui_scene_path)
 	if not ui_scene:
 		push_error("Failed to load UpgradeSelection scene at '%s'." % ui_scene_path)
 		return
-	print("UpgradeManager: UI scene loaded, instantiating...")
+
 	var root: Node = ui_scene.instantiate()
 	# If root is CanvasLayer, get the UpgradeSelectionUI child
 	if root is CanvasLayer:
@@ -51,7 +51,7 @@ func _instantiate_ui() -> void:
 	if not ui:
 		push_error("Failed to find UpgradeSelectionUI in scene")
 		return
-	print("UpgradeManager: UI instantiated, type=", ui.get_class(), " visible=", ui.visible)
+
 	ui.connect("upgrade_selected", Callable(self, "_on_upgrade_selected"))
 
 func load_all_upgrades() -> void:
@@ -73,15 +73,9 @@ func show_upgrade_selection(count: int = 3, wave: int = 1) -> void:
 	if not ui:
 		_instantiate_ui()
 	var choices: Array[Upgrade] = _pick_random_upgrades(count, wave)
-	print("UpgradeManager: ", choices.size(), " choices available")
-	print("UpgradeManager: all_upgrades count = ", all_upgrades.size())
-	print("UpgradeManager: obtained = ", obtained_upgrades)
-	print("UpgradeManager: ui=", ui, " in_tree=", ui.is_inside_tree() if ui else "null")
+
 	if ui:
 		ui.show_choices(choices)
-	else:
-		print("UpgradeManager: WARNING - ui is null!")
-
 func _pick_random_upgrades(count: int, wave: int = 1) -> Array[Upgrade]:
 	var is_first_shop = (wave == 1)
 	var filtered: Array[Upgrade] = []
@@ -139,7 +133,7 @@ func _on_upgrade_selected(upgrade: Upgrade) -> void:
 		else:
 			push_error("UpgradeManager: Found node in 'Player' group but it is not of type 'Player'!")
 			
-	print("UpgradeManager Debug: upgrade=", upgrade.id, " ability=", upgrade.ability)
+
 	
 	# Instantiate ability under player if applicable
 	if upgrade.ability:
@@ -147,10 +141,7 @@ func _on_upgrade_selected(upgrade: Upgrade) -> void:
 		if player:
 			player.add_child(ability_instance)
 			ability_instance.owner = player
-			print("UpgradeManager: Successfully instantiated and attached ability: ", upgrade.name)
 		else:
 			push_error("UpgradeManager: No player found when applying upgrade!")
-	else:
-		print("UpgradeManager: Upgrade selected is not an ability or has no scene attached.")
-		
+			
 	emit_signal("upgrade_chosen", upgrade)
