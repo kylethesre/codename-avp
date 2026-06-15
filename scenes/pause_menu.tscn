@@ -81,12 +81,16 @@ func _on_volume_slider_value_changed(value: float) -> void:
 	var bus_index = AudioServer.get_bus_index(\"Master\")
 	#Convert 0-1 slider into decibels
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+	# Explicitly mute if value is 0
+	AudioServer.set_bus_mute(bus_index, value <= 0.0)
 
 func _on_sfx_value_changed(value: float) -> void:
 	#Find ID for SFX audio channel
 	var bus_index = AudioServer.get_bus_index(\"SFX\")
 	#Convert 0-1 slider into decibels
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+	# Explicitly mute if value is 0
+	AudioServer.set_bus_mute(bus_index, value <= 0.0)
 "
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1214514540]
