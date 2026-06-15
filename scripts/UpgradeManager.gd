@@ -74,6 +74,9 @@ func show_upgrade_selection(count: int = 3, wave: int = 1) -> void:
 		_instantiate_ui()
 	var choices: Array[Upgrade] = _pick_random_upgrades(count, wave)
 
+	if choices.is_empty():
+		return
+
 	if ui:
 		ui.show_choices(choices)
 func _pick_random_upgrades(count: int, wave: int = 1) -> Array[Upgrade]:

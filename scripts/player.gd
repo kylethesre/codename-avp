@@ -147,6 +147,7 @@ func start_dash(dir: Vector2) -> void:
 func trigger_radial_knockback():
 
 	var pulse_radius = 75.0
+	var pulse_radius_sq = pulse_radius * pulse_radius
 	# Set a reasonable max force to prevent launching
 	var max_knockback_force = 300.0 
 	
@@ -155,11 +156,12 @@ func trigger_radial_knockback():
 	
 	#Loop through every single one
 	for enemy in all_enemies:
-		# Check distance between Player and THIS specific enemy
-		var distance = global_position.distance_to(enemy.global_position)
+		# Check distance between Player and THIS specific enemy (squared to avoid sqrt)
+		var dist_sq = global_position.distance_squared_to(enemy.global_position)
 		
 		#Only apply logic if they are within player radius
-		if distance <= pulse_radius:
+		if dist_sq <= pulse_radius_sq:
+			var distance = sqrt(dist_sq)
 			
 			#Calculate falloff (closer = more power, further = less power)
 			var linear_strength = clamp(1.0 - (distance / pulse_radius), 0.0, 1.0)

@@ -21,16 +21,8 @@ func _ready() -> void:
 	add_to_group("projectiles")
 	get_tree().create_timer(5.0).timeout.connect(queue_free)
 	
-	# Create a temporary AudioStreamPlayer2D
-	var temp_audio = AudioStreamPlayer2D.new()
-	temp_audio.stream = ability_sound.stream # Copy the sound file
-	temp_audio.bus = "SFX" # Make sure it uses your SFX bus!
-	add_child(temp_audio) # Add it to the bullet
-	
-	temp_audio.play()
-	
-	#Automatically delete this temporary player when the sound finishes
-	temp_audio.finished.connect(temp_audio.queue_free)
+	if ability_sound and ability_sound.stream:
+		ability_sound.play()
 
 func _physics_process(delta: float) -> void:
 	position += transform.x * speed * delta

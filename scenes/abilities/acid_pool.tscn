@@ -56,6 +56,7 @@ script = ExtResource("1_acid")
 shape = SubResource("CircleShape2D_acid")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=733240582]
+z_index = -1000
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_6pb6o")
 autoplay = "default"

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cdrqql6g8e2bv" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cxtblputmevgr" path="res://scripts/game.gd" id="11_game"]
 [ext_resource type="PackedScene" uid="uid://bw78pig260uqp" path="res://scenes/game_over_menu.tscn" id="11_kvpfn"]
+[ext_resource type="Script" path="res://scripts/enemy_spatial_grid.gd" id="12_grid"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 distance = -1.0
@@ -34,6 +35,7 @@ sources/2 = SubResource("TileSetScenesCollectionSource_vtaks")
 script = ExtResource("11_game")
 
 [node name="Parallax2D Trees" type="Parallax2D" parent="." unique_id=1169755589]
+z_index = -2000
 scroll_scale = Vector2(0.6, 1)
 repeat_size = Vector2(640, 0)
 repeat_times = 3
@@ -49,6 +51,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Parallax2D Grass Top" type="Parallax2D" parent="." unique_id=1080516206]
+z_index = -2000
 repeat_size = Vector2(640, 0)
 repeat_times = 3
 
@@ -63,6 +66,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Parallax2D Grass Bottom" type="Parallax2D" parent="." unique_id=1326760577]
+z_index = -2000
 scroll_offset = Vector2(0, 688)
 repeat_size = Vector2(640, 0)
 repeat_times = 3
@@ -133,6 +137,9 @@ visible = false
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
 visible = false
 tile_set = SubResource("TileSet_vtaks")
+
+[node name="EnemySpatialGrid" type="Node" parent="."]
+script = ExtResource("12_grid")
 
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="EnemySpawner/WaveTimer" to="EnemySpawner" method="_on_wave_timer_timeout"]

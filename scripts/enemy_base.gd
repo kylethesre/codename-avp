@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 # 2. Track the enemy's current health during gameplay
 var current_health: float
+var _max_health: float = 1.0
 
 var player: Node2D = null
 
@@ -18,7 +19,19 @@ var bleed_timer: Timer
 
 var _cached_neighbors: Array = []
 var _neighbor_refresh_timer: float = 0.0
-const NEIGHBOR_REFRESH_INTERVAL: float = 0.2
+const NEIGHBOR_REFRESH_INTERVAL: float = 0.25
+const MIN_SEP_DIST: float = 24.0
+const MIN_SEP_DIST_SQ: float = 576.0 # 24*24
+const MAX_SEPARATION_NEIGHBORS: int = 6
+
+var _spatial_grid: Node = null
+
+var _ft_cooldown: float = 0.0
+const FT_COOLDOWN_TIME: float = 0.2
+const FloatingTextScene = preload("res://scenes/floating_text.tscn")
+
+var _current_anim: String = ""
+var _current_flip: bool = false
 
 #Get reference for animated sprite
 @onready var animated_sprite = $AnimatedSprite2D
@@ -32,41 +45,30 @@ func _ready() -> void:
 	# Initialize health using the resource data
 	if stats:
 		current_health = stats.max_health
+		_max_health = stats.max_health
 	else:
 		push_error("Oops! This enemy doesn't have a stats resource assigned.")
-
-	# Create HP Bar dynamically
-	var hp_bar = ProgressBar.new()
-	hp_bar.name = "HPBar"
-	if stats:
-		hp_bar.max_value = stats.max_health
-		hp_bar.value = current_health
-	hp_bar.show_percentage = false
-	
-	var sb_bg = StyleBoxFlat.new()
-	sb_bg.bg_color = Color(0.2, 0.2, 0.2, 0.8)
-	var sb_fg = StyleBoxFlat.new()
-	sb_fg.bg_color = Color(0.8, 0.1, 0.1, 0.8)
-	hp_bar.add_theme_stylebox_override("background", sb_bg)
-	hp_bar.add_theme_stylebox_override("fill", sb_fg)
-	
-	hp_bar.custom_minimum_size = Vector2(24, 4)
-	hp_bar.size = Vector2(24, 4)
-	hp_bar.position = Vector2(-12, -20) # Position above enemy
-	add_child(hp_bar)
 
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
+	
+	# Find the spatial grid
+	_spatial_grid = get_tree().current_scene.get_node_or_null("EnemySpatialGrid")
 		
 	bleed_timer = Timer.new()
 	bleed_timer.wait_time = 0.5
 	bleed_timer.timeout.connect(_on_bleed_tick)
 	add_child(bleed_timer)
+	
+	# Stagger neighbor refresh so not all enemies refresh on the same frame
+	_neighbor_refresh_timer = randf() * NEIGHBOR_REFRESH_INTERVAL
 
 func _physics_process(_delta: float) -> void:
-	#if knockback
+	if _ft_cooldown > 0:
+		_ft_cooldown -= _delta
 	
+	#if knockback
 	if knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
 		move_and_slide()
@@ -77,53 +79,68 @@ func _physics_process(_delta: float) -> void:
 	elif player and stats:
 		var direction = (player.global_position - global_position).normalized()
 		
-		# Calculate separation to avoid overlapping other enemies
-		# Refresh neighbor cache periodically instead of every frame
+		# Calculate separation using spatial grid for fast neighbor lookup
 		_neighbor_refresh_timer -= _delta
 		if _neighbor_refresh_timer <= 0:
 			_neighbor_refresh_timer = NEIGHBOR_REFRESH_INTERVAL
-			_cached_neighbors = get_tree().get_nodes_in_group("enemies")
+			if _spatial_grid:
+				_cached_neighbors = _spatial_grid.get_nearby(global_position, self)
+			else:
+				_cached_neighbors = get_tree().get_nodes_in_group("enemies")
 		
 		var separation = Vector2.ZERO
-		var min_separation_dist = 24.0
+		var sep_count = 0
 		
 		for neighbor in _cached_neighbors:
-			if neighbor == self or not is_instance_valid(neighbor):
+			if sep_count >= MAX_SEPARATION_NEIGHBORS:
+				break
+			if not is_instance_valid(neighbor):
 				continue
 			var diff = global_position - neighbor.global_position
 			var dist_sq = diff.length_squared()
-			if dist_sq > 0 and dist_sq < min_separation_dist * min_separation_dist:
+			if dist_sq > 0 and dist_sq < MIN_SEP_DIST_SQ:
 				var dist = sqrt(dist_sq)
-				separation += diff.normalized() * (1.0 - (dist / min_separation_dist))
+				separation += diff / dist * (1.0 - (dist / MIN_SEP_DIST))
+				sep_count += 1
 		
 		var final_direction = (direction + separation * 1.5).normalized()
 		
-		# 3. Use the speed value stored inside our resource!
 		velocity = final_direction * stats.speed
 		move_and_slide()
 		
-	#Call animation after calculating velocity	
-	update_animation()
-	
-	#Animated sprite flip code
-func update_animation() -> void:
-	#Check if the enemy is actually moving
-	if velocity.length() > 0:
-		#Play the walking animation
-		animated_sprite.play("walk_side")
+	#Call animation after calculating velocity
+	_update_animation()
+
+func _draw() -> void:
+	# Lightweight HP bar drawn directly - no Control node overhead
+	if _max_health <= 0:
+		return
+	var hp_pct = clampf(current_health / _max_health, 0.0, 1.0)
+	var bar_w = 24.0
+	var bar_h = 3.0
+	var bar_y = -20.0
+	# Background
+	draw_rect(Rect2(-bar_w * 0.5, bar_y, bar_w, bar_h), Color(0.2, 0.2, 0.2, 0.8))
+	# Fill
+	if hp_pct > 0:
+		draw_rect(Rect2(-bar_w * 0.5, bar_y, bar_w * hp_pct, bar_h), Color(0.8, 0.1, 0.1, 0.8))
+
+func _update_animation() -> void:
+	if velocity.length_squared() > 0:
+		if _current_anim != "walk_side":
+			_current_anim = "walk_side"
+			animated_sprite.play("walk_side")
 		
-		#Flip sprite horizontally if moving left (negative x velocity)
-		if velocity.x < 0:
-			animated_sprite.flip_h = true
-		#Un-flip the sprite if moving right (positive x velocity)
-		elif velocity.x > 0:
-			animated_sprite.flip_h = false
+		#Flip sprite horizontally based on movement direction
+		var should_flip = velocity.x < 0
+		if should_flip != _current_flip:
+			_current_flip = should_flip
+			animated_sprite.flip_h = should_flip
 	else:
-		#Stop the animation (or play an "idle" animation) if standing still
-		animated_sprite.stop()
+		if _current_anim != "idle":
+			_current_anim = "idle"
+			animated_sprite.stop()
 		
-			
-		#more knockback stuff
 func apply_knockback(force: Vector2) -> void:
 	knockback_velocity = force
 
@@ -135,19 +152,20 @@ func take_damage(amount: float) -> void:
 	var final_damage = max(amount - stats.armor, 1.0)
 	current_health -= final_damage
 	
-	var hp_bar = get_node_or_null("HPBar")
-	if hp_bar:
-		hp_bar.value = current_health
+	# Redraw HP bar
+	queue_redraw()
 		
-	# Damage indicator
-	var ft = preload("res://scenes/floating_text.tscn").instantiate()
-	var lbl = ft.get_node("Label")
-	lbl.text = str(final_damage)
-	lbl.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
-	lbl.add_theme_font_size_override("font_size", 10)
-	
-	ft.global_position = global_position + Vector2(randf_range(-10, 10), -20)
-	get_tree().current_scene.call_deferred("add_child", ft)
+	# Damage indicator - throttled to prevent node spam
+	if _ft_cooldown <= 0:
+		_ft_cooldown = FT_COOLDOWN_TIME
+		var ft = FloatingTextScene.instantiate()
+		var lbl = ft.get_node("Label")
+		lbl.text = str(int(final_damage))
+		lbl.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+		lbl.add_theme_font_size_override("font_size", 10)
+		
+		ft.global_position = global_position + Vector2(randf_range(-10, 10), -20)
+		get_tree().current_scene.call_deferred("add_child", ft)
 	
 	if current_health <= 0:
 		if player and player.has_signal("enemy_killed"):
