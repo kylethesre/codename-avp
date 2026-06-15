@@ -27,6 +27,26 @@ func _ready() -> void:
 	else:
 		push_error("Oops! This enemy doesn't have a stats resource assigned.")
 
+	# Create HP Bar dynamically
+	var hp_bar = ProgressBar.new()
+	hp_bar.name = "HPBar"
+	if stats:
+		hp_bar.max_value = stats.max_health
+		hp_bar.value = current_health
+	hp_bar.show_percentage = false
+	
+	var sb_bg = StyleBoxFlat.new()
+	sb_bg.bg_color = Color(0.2, 0.2, 0.2, 0.8)
+	var sb_fg = StyleBoxFlat.new()
+	sb_fg.bg_color = Color(0.8, 0.1, 0.1, 0.8)
+	hp_bar.add_theme_stylebox_override("background", sb_bg)
+	hp_bar.add_theme_stylebox_override("fill", sb_fg)
+	
+	hp_bar.custom_minimum_size = Vector2(24, 4)
+	hp_bar.size = Vector2(24, 4)
+	hp_bar.position = Vector2(-12, -20) # Position above enemy
+	add_child(hp_bar)
+
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
@@ -97,6 +117,20 @@ func take_damage(amount: float) -> void:
 	# Simple math: reduce damage taken by the armor amount (minimum 1 damage)
 	var final_damage = max(amount - stats.armor, 1.0)
 	current_health -= final_damage
+	
+	var hp_bar = get_node_or_null("HPBar")
+	if hp_bar:
+		hp_bar.value = current_health
+		
+	# Damage indicator
+	var ft = preload("res://scenes/floating_text.tscn").instantiate()
+	var lbl = ft.get_node("Label")
+	lbl.text = str(final_damage)
+	lbl.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+	lbl.add_theme_font_size_override("font_size", 10)
+	
+	ft.global_position = global_position + Vector2(randf_range(-10, 10), -20)
+	get_tree().current_scene.call_deferred("add_child", ft)
 	
 	print(name, " took ", final_damage, " damage. Health remaining: ", current_health)
 	

@@ -71,8 +71,12 @@ func show_upgrade_selection(count: int = 3) -> void:
 		print("UpgradeManager: WARNING - ui is null!")
 
 func _pick_random_upgrades(count: int) -> Array[Upgrade]:
+	var is_first_shop = obtained_upgrades.is_empty()
 	var filtered: Array[Upgrade] = []
 	for u in all_upgrades:
+		if is_first_shop and not u.is_ability:
+			continue
+			
 		# Check prerequisites
 		var meets_prereq: bool = true
 		for prereq in u.prerequisites:

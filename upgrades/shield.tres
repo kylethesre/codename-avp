@@ -12,6 +12,6 @@ max_instances = 5
 prerequisites = []
 mutually_exclusive = []
 rarity = 2
-name = "Dodge Roll"
+name = "Dodge"
 desc = "+10% chance to dodge attacks (up to 50%)"
 is_ability = false
