@@ -12,4 +12,5 @@ enum Rarity { STONE, BRONZE, GOLD }
 @export var rarity: Rarity
 @export var name: String
 @export var desc: String
+@export var icon: Texture2D
 @export var is_ability: bool

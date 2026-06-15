@@ -1,10 +1,23 @@
-[gd_scene format=3 uid="uid://b7vq8x2y3m4n5"]
+[gd_scene load_steps=6 format=3 uid="uid://b7vq8x2y3m4n5"]
 
-[ext_resource type="Script" uid="uid://c86rk4bl36yei" path="res://scripts/UpgradeSelectionUI.gd" id="1_ui"]
+[ext_resource type="Script" path="res://scripts/UpgradeSelectionUI.gd" id="1_ui"]
+[ext_resource type="Texture2D" uid="uid://36fkp46f0kq5" path="res://assets/pixelCardAssest.png" id="2_6oqr2"]
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=1947860572]
+[sub_resource type="AtlasTexture" id="AtlasTexture_knpde"]
+atlas = ExtResource("2_6oqr2")
+region = Rect2(16, 223, 96, 29)
 
-[node name="UpgradeSelectionUI" type="Control" parent="." unique_id=2083513551]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mh05"]
+atlas = ExtResource("2_6oqr2")
+region = Rect2(135, 224, 96, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0r78"]
+atlas = ExtResource("2_6oqr2")
+region = Rect2(252, 223, 96, 29)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="UpgradeSelectionUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,21 +26,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ui")
 
-[node name="Panel" type="Panel" parent="UpgradeSelectionUI" unique_id=246148885]
+[node name="Panel" type="Panel" parent="UpgradeSelectionUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -150.0
-offset_right = 200.0
-offset_bottom = 150.0
+offset_left = -132.0
+offset_top = -200.0
+offset_right = 132.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeSelectionUI/Panel" unique_id=764244573]
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeSelectionUI/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,23 +53,176 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer" unique_id=636161957]
+[node name="TitleLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer"]
 layout_mode = 2
 text = "Choose an Upgrade"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="UpgradeSelectionUI/Panel/VBoxContainer" unique_id=1130544090]
+[node name="Spacer" type="Control" parent="UpgradeSelectionUI/Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="Option1Button" type="Button" parent="UpgradeSelectionUI/Panel/VBoxContainer" unique_id=713819013]
+[node name="Option1Button" type="TextureButton" parent="UpgradeSelectionUI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-text = "Option 1"
+texture_normal = SubResource("AtlasTexture_knpde")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="Option2Button" type="Button" parent="UpgradeSelectionUI/Panel/VBoxContainer" unique_id=380514135]
-layout_mode = 2
-text = "Option 2"
+[node name="ColorRect" type="ColorRect" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option1Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
 
-[node name="Option3Button" type="Button" parent="UpgradeSelectionUI/Panel/VBoxContainer" unique_id=932778815]
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option1Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 0
+mouse_filter = 2
+
+[node name="SpacerTop" type="Control" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option1Button/VBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
-text = "Option 3"
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option1Button/VBoxContainer"]
+layout_mode = 2
+text = "Option Name"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option1Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+mouse_filter = 2
+
+[node name="DescLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option1Button/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Option Description"
+horizontal_alignment = 1
+vertical_alignment = 0
+autowrap_mode = 2
+
+[node name="Option2Button" type="TextureButton" parent="UpgradeSelectionUI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_4mh05")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option2Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option2Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 0
+mouse_filter = 2
+
+[node name="SpacerTop" type="Control" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option2Button/VBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option2Button/VBoxContainer"]
+layout_mode = 2
+text = "Option Name"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option2Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+mouse_filter = 2
+
+[node name="DescLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option2Button/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Option Description"
+horizontal_alignment = 1
+vertical_alignment = 0
+autowrap_mode = 2
+
+[node name="Option3Button" type="TextureButton" parent="UpgradeSelectionUI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_l0r78")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option3Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option3Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 0
+mouse_filter = 2
+
+[node name="SpacerTop" type="Control" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option3Button/VBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option3Button/VBoxContainer"]
+layout_mode = 2
+text = "Option Name"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option3Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+mouse_filter = 2
+
+[node name="DescLabel" type="Label" parent="UpgradeSelectionUI/Panel/VBoxContainer/Option3Button/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Option Description"
+horizontal_alignment = 1
+vertical_alignment = 0
+autowrap_mode = 2
