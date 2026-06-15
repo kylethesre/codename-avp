@@ -19,5 +19,3 @@ func _ready() -> void:
 	tw.tween_property(self, "modulate:a", 0.0, 0.2)
 	tw.tween_callback(queue_free)
 
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, 60.0, Color(1.0, 0.5, 0.0, 0.5))
