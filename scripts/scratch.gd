@@ -6,17 +6,14 @@ extends Node2D
 
 @onready var timer = $Timer
 @onready var hit_area = $HitArea
-
-var is_scratching: bool = false
-var scratch_alpha: float = 0.0
+@onready var sprite = $HitArea/Sprite2D
 
 func _ready():
 	timer.wait_time = cooldown
 	timer.timeout.connect(_on_timeout)
 	timer.start()
 	hit_area.monitoring = false
-	hit_area.collision_mask = 0
-	hit_area.set_collision_mask_value(3, true) # Layer 3 = Enemies
+	sprite.visible = false
 
 func _on_timeout():
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -31,14 +28,15 @@ func _on_timeout():
 			
 	if closest:
 		look_at(closest.global_position)
-		is_scratching = true
-		scratch_alpha = 1.0
+		sprite.visible = true
+		sprite.scale = Vector2(0.5, 0.5)
+		sprite.modulate.a = 1.0
 		hit_area.monitoring = true
-		queue_redraw()
 		
-		# Animate the scratch fading
 		var tw = create_tween()
-		tw.tween_property(self, "scratch_alpha", 0.0, 0.2)
+		tw.set_parallel(true)
+		tw.tween_property(sprite, "scale", Vector2(1.5, 1.5), 0.1)
+		tw.tween_property(sprite, "modulate:a", 0.0, 0.2)
 		
 		await get_tree().physics_frame
 		await get_tree().physics_frame
@@ -51,13 +49,4 @@ func _on_timeout():
 				
 		hit_area.monitoring = false
 		await tw.finished
-		is_scratching = false
-		queue_redraw()
-
-func _draw():
-	if is_scratching:
-		var c = Color(1.0, 0.1, 0.1, scratch_alpha)
-		# Draw 3 claw marks
-		draw_line(Vector2(20, -15), Vector2(60, -15), c, 4.0)
-		draw_line(Vector2(20, 0), Vector2(65, 0), c, 4.0)
-		draw_line(Vector2(20, 15), Vector2(60, 15), c, 4.0)
+		sprite.visible = false

@@ -6,15 +6,7 @@ var leaves_acid: bool = false
 var target: Node2D = null
 
 func _ready():
-	collision_mask = 0
-	set_collision_mask_value(3, true)
 	body_entered.connect(_on_body_entered)
-	
-	var shape = CollisionShape2D.new()
-	var circ = CircleShape2D.new()
-	circ.radius = 8.0
-	shape.shape = circ
-	add_child(shape)
 	
 	var t = Timer.new()
 	t.wait_time = 5.0
@@ -48,9 +40,3 @@ func _on_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 		queue_free()
-
-func _draw():
-	var c = Color(0.2, 1.0, 0.2, 0.8)
-	draw_circle(Vector2.ZERO, 6.0, c)
-	draw_line(Vector2(0, -6), Vector2(10, 0), c, 2.0)
-	draw_line(Vector2(0, 6), Vector2(10, 0), c, 2.0)

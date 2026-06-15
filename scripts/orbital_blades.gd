@@ -28,17 +28,9 @@ func _update_blades():
 			b.queue_free()
 	blades.clear()
 	
+	var blade_scene = preload("res://scenes/abilities/orbital_blade_projectile.tscn")
 	for i in range(blade_count):
-		var area = Area2D.new()
-		area.collision_mask = 0
-		area.set_collision_mask_value(3, true)
-		
-		var shape = CollisionShape2D.new()
-		var circle = CircleShape2D.new()
-		circle.radius = 12.0
-		shape.shape = circle
-		area.add_child(shape)
-		
+		var area = blade_scene.instantiate()
 		add_child(area)
 		blades.append(area)
 
@@ -61,13 +53,4 @@ func _physics_process(delta):
 			if not hit_cooldowns.has(body):
 				if body.has_method("take_damage"):
 					body.take_damage(damage)
-					hit_cooldowns[body] = 0.5 
-	queue_redraw()
-
-func _draw():
-	var angle_step = PI * 2.0 / blade_count
-	for i in range(blade_count):
-		var angle = i * angle_step
-		var pos = Vector2(cos(angle), sin(angle)) * radius
-		draw_circle(pos, 12.0, Color(0, 1, 1, 0.8)) # Aqua
-		draw_circle(pos, 6.0, Color.WHITE)
+					hit_cooldowns[body] = 0.5
