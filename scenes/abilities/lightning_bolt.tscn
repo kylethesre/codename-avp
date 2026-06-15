@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://sv8tllgkn6ep"]
 
 [ext_resource type="Script" uid="uid://mhky88ps8lqw" path="res://scripts/lightning_bolt.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://xatsv7cvkpip" path="res://assets/lightning_burst_002/lightning_burst_002_large_violet/spritesheet.png" id="2_0am4e"]
 [ext_resource type="AudioStream" uid="uid://dj4ft0jp0yeas" path="res://music/Sfx pack 4 free/Sfx pack 4 free/Explosion/Explosion8.wav" id="2_s0l21"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
@@ -12,6 +13,77 @@ size = Vector2(10, 300)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_impact"]
 size = Vector2(80, 80)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2j4yj"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enqp8"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71nkb"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlqwf"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akq25"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyyo7"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my01s"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vwc5"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wikj"]
+atlas = ExtResource("2_0am4e")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s0wmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2j4yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enqp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71nkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlqwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akq25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyyo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my01s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vwc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wikj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
 [node name="LightningBolt" type="Area2D" unique_id=1162620872]
 collision_layer = 0
 collision_mask = 4
@@ -21,14 +93,21 @@ script = ExtResource("1")
 shape = SubResource("CircleShape2D_1")
 
 [node name="BoltSprite" type="Sprite2D" parent="." unique_id=1021389940]
+visible = false
 modulate = Color(1, 1, 0, 1)
 position = Vector2(0, -150)
 texture = SubResource("PlaceholderTexture2D_bolt")
 
 [node name="ImpactSprite" type="Sprite2D" parent="." unique_id=1482282047]
+visible = false
 modulate = Color(1, 1, 0, 0.5)
 texture = SubResource("PlaceholderTexture2D_impact")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1106659335]
 stream = ExtResource("2_s0l21")
 autoplay = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1099836623]
+sprite_frames = SubResource("SpriteFrames_s0wmh")
+autoplay = "default"
+frame_progress = 0.9593988

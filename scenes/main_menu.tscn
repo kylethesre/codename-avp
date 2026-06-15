@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmfiwc4mtehoi"]
 
-[ext_resource type="Texture2D" uid="uid://b8vswiwj4k27c" path="res://assets/Forest&&Moon Pixel Art/Preview/BackGround.png" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://b8vswiwj4k27c" path="res://assets/Main Menu Art/Preview/BackGround.png" id="1_l6cm7"]
 
 [sub_resource type="GDScript" id="GDScript_ekxnf"]
 script/source = "extends Control
@@ -25,9 +25,9 @@ subpixel_positioning = 0
 [sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
 font = SubResource("SystemFont_l6cm7")
 font_size = 71
+font_color = Color(0, 0, 0, 1)
 stacked_outline_count = 1
 stacked_outline_0/size = 6
-stacked_outline_0/color = Color(0.45137727, 0.4665687, 0.08957908, 1)
 
 [node name="MainMenu" type="Control" unique_id=873358167]
 layout_mode = 3
@@ -76,14 +76,14 @@ text = "Quit"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1678586225]
 layout_mode = 0
-offset_left = -263.0
+offset_left = -251.0
 offset_top = -122.0
-offset_right = 237.0
-offset_bottom = -58.0
+offset_right = 261.0
+offset_bottom = -50.0
 
-[node name="Label" type="Label" parent="VBoxContainer2" unique_id=871486088]
+[node name="Game Name" type="Label" parent="VBoxContainer2" unique_id=871486088]
 layout_mode = 2
-text = "Kitty Meow Game"
+text = "Forest Defender"
 label_settings = SubResource("LabelSettings_ekxnf")
 horizontal_alignment = 1
 vertical_alignment = 1

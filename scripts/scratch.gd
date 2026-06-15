@@ -6,7 +6,7 @@ extends Node2D
 
 @onready var timer = $Timer
 @onready var hit_area = $HitArea
-@onready var sprite = $HitArea/Sprite2D
+@onready var sprite = $HitArea/AnimatedSprite2D
 
 func _ready():
 	timer.wait_time = cooldown

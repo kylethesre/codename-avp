@@ -1,24 +1,97 @@
-[gd_scene load_steps=5 format=3 uid="uid://scratch_ability_scene"]
-[ext_resource type="Script" path="res://scripts/scratch.gd" id="1"]
-[sub_resource type="RectangleShape2D" id="Rect"]
-size = Vector2(60, 60)
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1"]
-size = Vector2(60, 60)
+[gd_scene format=3 uid="uid://t2y5v6ycjko8"]
 
-[node name="Scratch" type="Node2D"]
+[ext_resource type="Script" uid="uid://bmcsqb735xlke" path="res://scripts/scratch.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c6or4jkn6dkia" path="res://assets/Scratch Effect/CS001.png" id="2_d6oh8"]
+[ext_resource type="Texture2D" uid="uid://bms4nxt5ymgp6" path="res://assets/Scratch Effect/CS002.png" id="3_fqrde"]
+[ext_resource type="Texture2D" uid="uid://bgtk330imkyon" path="res://assets/Scratch Effect/CS003.png" id="4_waiep"]
+[ext_resource type="Texture2D" uid="uid://djh8v5gmkxrpf" path="res://assets/Scratch Effect/CS004.png" id="5_qvlsr"]
+[ext_resource type="Texture2D" uid="uid://ddpryosqpr6m7" path="res://assets/Scratch Effect/CS005.png" id="6_chfxm"]
+[ext_resource type="Texture2D" uid="uid://dewlj2gcagngp" path="res://assets/Scratch Effect/CS006.png" id="7_d3odw"]
+[ext_resource type="Texture2D" uid="uid://casy7mm7qdqfo" path="res://assets/Scratch Effect/CS007.png" id="8_rm00p"]
+[ext_resource type="Texture2D" uid="uid://dkvonpl0ljpto" path="res://assets/Scratch Effect/CS008.png" id="9_gdajq"]
+
+[sub_resource type="RectangleShape2D" id="Rect"]
+size = Vector2(42, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwvs2"]
+atlas = ExtResource("2_d6oh8")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0d1t"]
+atlas = ExtResource("3_fqrde")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e313"]
+atlas = ExtResource("4_waiep")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjtpo"]
+atlas = ExtResource("5_qvlsr")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eydwe"]
+atlas = ExtResource("6_chfxm")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s532n"]
+atlas = ExtResource("7_d3odw")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k00tn"]
+atlas = ExtResource("8_rm00p")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upd42"]
+atlas = ExtResource("9_gdajq")
+region = Rect2(0, 0, 45, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ixieu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwvs2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0d1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e313")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjtpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eydwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s532n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k00tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upd42")
+}],
+"loop": true,
+"name": &"default",
+"speed": 17.0
+}]
+
+[node name="Scratch" type="Node2D" unique_id=1156033989]
 script = ExtResource("1")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1094840122]
 
-[node name="HitArea" type="Area2D" parent="."]
+[node name="HitArea" type="Area2D" parent="." unique_id=1384413666]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-position = Vector2(40, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=690359867]
+position = Vector2(40, 0.5)
 shape = SubResource("Rect")
 
-[node name="Sprite2D" type="Sprite2D" parent="HitArea"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HitArea" unique_id=1303759502]
 position = Vector2(40, 0)
-texture = SubResource("PlaceholderTexture2D_1")
-modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_ixieu")
+autoplay = "default"
+frame_progress = 0.0878714
