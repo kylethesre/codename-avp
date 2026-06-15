@@ -1,11 +1,28 @@
 [gd_scene format=3 uid="uid://dtf5v77dx3dvt"]
 
 [ext_resource type="Script" uid="uid://cupcdqa2ckvlj" path="res://scripts/player.gd" id="1_rkhd4"]
+[ext_resource type="Texture2D" uid="uid://cehrs88uayty2" path="res://assets/FreeCatCharacterAnimations/4_Cat_Fall-Sheet.png" id="2_my7n2"]
 [ext_resource type="Texture2D" uid="uid://h8yfptnkkevt" path="res://assets/FreeCatCharacterAnimations/1_Cat_Idle-Sheet.png" id="3_my7n2"]
 [ext_resource type="Texture2D" uid="uid://dowvu5yl8qiri" path="res://assets/FreeCatCharacterAnimations/2_Cat_Run-Sheet.png" id="4_dp8ca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrhn5"]
 size = Vector2(9, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp8ca"]
+atlas = ExtResource("2_my7n2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qyni"]
+atlas = ExtResource("2_my7n2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sougf"]
+atlas = ExtResource("2_my7n2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p478o"]
+atlas = ExtResource("2_my7n2")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0lw5n"]
 atlas = ExtResource("3_my7n2")
@@ -83,6 +100,23 @@ region = Rect2(288, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dp8ca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qyni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sougf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p478o")
+}],
+"loop": false,
+"name": &"Hurt",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0lw5n")
 }, {
 "duration": 1.0,
@@ -157,5 +191,7 @@ shape = SubResource("RectangleShape2D_lrhn5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1694543748]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_7qyni")
-animation = &"Run"
+animation = &"Hurt"
 autoplay = "Idle"
+frame = 3
+frame_progress = 1.0

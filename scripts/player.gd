@@ -11,9 +11,16 @@ signal health_changed(health: int, max_health: int)
 # Node references
 @onready var animated_sprite = $AnimatedSprite2D
 
+var is_hurt: bool = false
+
 func take_damage(amount: int = 1):
 	health -= amount
 	health_changed.emit(health, max_health)
+	#added for hurt animation
+	is_hurt = true
+	animated_sprite.play("Hurt")
+	await get_tree().create_timer(0.3).timeout # Adjust 0.3 to your animation length
+	is_hurt = false
 	
 	# --- ADDED LOGIC START ---
 	if health <= 0:
@@ -106,10 +113,22 @@ func trigger_radial_knockback():
 
 #Animation process to make the sprites flip
 func _process(_delta):
-	#If the character's velocity is greater than 0, they are moving.
+	# 1. If we are hurt, stop everything else and just exit the function
+	if is_hurt:
+		return 
+	
+	# 2. Only if we are NOT hurt, do the movement animations
 	if velocity.length() > 0:
 		animated_sprite.play("Run")
-			
-	#If the velocity is exactly 0, they are standing still.
+	else:
+		animated_sprite.play("Idle")
+		
+		# If we are hurt, we do NOT run the movement animation logic
+	if is_hurt:
+		return 
+
+	# Existing logic remains
+	if velocity.length() > 0:
+		animated_sprite.play("Run")
 	else:
 		animated_sprite.play("Idle")
