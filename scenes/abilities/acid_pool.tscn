@@ -1,12 +1,62 @@
-[gd_scene load_steps=3 format=3 uid="uid://acid_pool_scene"]
+[gd_scene format=3 uid="uid://b5lhcs4u6dwh1"]
 
-[ext_resource type="Script" path="res://scripts/acid_pool.gd" id="1_acid"]
+[ext_resource type="Script" uid="uid://d1msyhw5n1jnu" path="res://scripts/acid_pool.gd" id="1_acid"]
+[ext_resource type="Texture2D" uid="uid://c8mhdx0fvy64x" path="res://assets/acidpool.png" id="2_yy004"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_acid"]
 radius = 50.0
 
-[node name="AcidPool" type="Area2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrhlk"]
+atlas = ExtResource("2_yy004")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x3aq"]
+atlas = ExtResource("2_yy004")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bq27"]
+atlas = ExtResource("2_yy004")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te8pe"]
+atlas = ExtResource("2_yy004")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsrsw"]
+atlas = ExtResource("2_yy004")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6pb6o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrhlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x3aq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bq27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te8pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsrsw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="AcidPool" type="Area2D" unique_id=676634600]
 script = ExtResource("1_acid")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=432727718]
 shape = SubResource("CircleShape2D_acid")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=733240582]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6pb6o")
+autoplay = "default"
+frame_progress = 0.23776118

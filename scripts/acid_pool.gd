@@ -39,6 +39,3 @@ func _on_tick() -> void:
 	for enemy in enemies_inside:
 		if is_instance_valid(enemy):
 			enemy.take_damage(damage_per_tick)
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, radius, Color(0.0, 1.0, 0.0, 0.4))
