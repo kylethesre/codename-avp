@@ -70,6 +70,24 @@ func update_upgrades_list():
 func _on_resume_button_pressed() -> void:
 	#Resume unpauses game
 	toggle_pause()
+
+func _on_quit_button_pressed() -> void:
+	#quit takes you back to main menu
+	get_tree().paused = false
+	#load main menu scene
+	get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
+
+func _on_volume_slider_value_changed(value: float) -> void:
+	#Find ID for main audio channel
+	var bus_index = AudioServer.get_bus_index(\"Master\")
+	#Convert 0-1 slider into decibels
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+
+func _on_sfx_value_changed(value: float) -> void:
+	#Find ID for SFX audio channel
+	var bus_index = AudioServer.get_bus_index(\"SFX\")
+	#Convert 0-1 slider into decibels
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 "
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1214514540]
