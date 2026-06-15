@@ -3,11 +3,14 @@ extends Node2D
 @onready var enemy_spawner: Node = $EnemySpawner
 var player: Node2D = null
 
+var wave_text: Node
+
 func _ready() -> void:
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
 		
+	wave_text = get_tree().current_scene.find_child("Wave_text_counter", true)
 	if enemy_spawner.has_signal("wave_started"):
 		var wave_callable: Callable = Callable(self, "_on_wave_started")
 		if not enemy_spawner.is_connected("wave_started", wave_callable):
@@ -20,6 +23,7 @@ func _ready() -> void:
 
 func _on_wave_started(wave: int) -> void:
 	print("Game: Wave started signal received ", wave)
+	wave_text.text = "wave %d" % wave
 	UpgradeManager.show_upgrade_selection(3)
 
 func _process(delta: float) -> void:
@@ -40,3 +44,4 @@ func _process(delta: float) -> void:
 			entity.global_position.x -= wrap_dist_x * 2
 		elif diff.x < -wrap_dist_x:
 			entity.global_position.x += wrap_dist_x * 2
+	

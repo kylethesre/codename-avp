@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bcc0mu6u0d7q5" path="res://assets/retrorpg/Beatle.png" id="1_pnjsp"]
 [ext_resource type="Resource" uid="uid://bmx8s0p0f71p2" path="res://stats/beatle.tres" id="2_ioycx"]
 [ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_jmh3t"]
-[ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_1u11n"]
+[ext_resource type="PackedScene" uid="uid://ws7hmjrqtgr2" path="res://scenes/enemies/enemy_projectile.tscn" id="5_ylg2o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w3ifu"]
 atlas = ExtResource("1_pnjsp")
@@ -99,7 +99,7 @@ shape = SubResource("CircleShape2D_holp5")
 [node name="Basic Gun2" type="Node2D" parent="." unique_id=120207343]
 position = Vector2(-22, -6)
 script = ExtResource("4_jmh3t")
-projectile_scene = ExtResource("5_1u11n")
+projectile_scene = ExtResource("5_ylg2o")
 damage = 1.0
 target_layer = 2
 projectile_speed = 200.0

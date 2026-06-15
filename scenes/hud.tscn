@@ -35,3 +35,19 @@ texture = SubResource("AtlasTexture_oo0fn")
 [node name="Heart4" type="TextureRect" parent="HeartContainer" unique_id=1030046570]
 layout_mode = 2
 texture = SubResource("AtlasTexture_oo0fn")
+
+[node name="Wave_text_counter" type="RichTextLabel" parent="." unique_id=1984248273]
+unique_name_in_owner = true
+offset_left = 5.5
+offset_top = 21.0
+offset_right = 86.0
+offset_bottom = 43.0
+text = "Wave 1"
+
+[node name="Wave_countdown_display" type="RichTextLabel" parent="." unique_id=1180833806]
+offset_left = 6.25
+offset_top = 39.75
+offset_right = 88.0
+offset_bottom = 63.0
+theme_override_font_sizes/normal_font_size = 12
+text = "Next in: 60"
