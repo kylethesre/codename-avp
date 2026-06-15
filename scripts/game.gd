@@ -27,6 +27,9 @@ func _on_wave_started(wave: int) -> void:
 	wave_text.text = "wave %d" % wave
 	UpgradeManager.show_upgrade_selection(3, wave)
 
+func _exit_tree() -> void:
+	UpgradeManager.reset()
+
 func _process(delta: float) -> void:
 	if not player: return
 	

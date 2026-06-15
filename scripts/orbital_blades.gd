@@ -48,6 +48,7 @@ func _physics_process(delta):
 		if not is_instance_valid(blades[i]): continue
 		var angle = i * angle_step
 		blades[i].position = Vector2(cos(angle), sin(angle)) * radius
+		blades[i].rotation = angle
 		
 		for body in blades[i].get_overlapping_bodies():
 			if not hit_cooldowns.has(body):
