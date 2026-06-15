@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b4id3yexe7o5t"]
+[gd_scene format=3 uid="uid://d3maxga2gaodl"]
 
 [ext_resource type="Script" uid="uid://bho2csihju06t" path="res://scripts/explosion.gd" id="1_exp"]
 [ext_resource type="Texture2D" path="res://assets/epic_explosion_002_small_yellow/spritesheet.png" id="2_nfeox"]
+[ext_resource type="AudioStream" uid="uid://dxiok5ncwrql8" path="res://music/Sfx pack 4 free/Sfx pack 4 free/Explosion/Explosion3.wav" id="2_nfeox"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_exp"]
 radius = 60.0
@@ -129,3 +131,7 @@ shape = SubResource("CircleShape2D_exp")
 sprite_frames = SubResource("SpriteFrames_0j0nb")
 autoplay = "default"
 frame_progress = 0.0988613
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=824133574]
+stream = ExtResource("2_nfeox")
+autoplay = true

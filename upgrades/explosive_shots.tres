@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://cykmnx703rjv3"]
 
-[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="Script" uid="uid://cbaspi18oo6xg" path="res://scripts/Upgrade.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/abilities/explosive_shots.tscn" id="2_es"]
 
 [resource]
@@ -8,10 +8,8 @@ script = ExtResource("1")
 id = "explosive_shots"
 ability = ExtResource("2_es")
 weight = 40
-max_instances = 1
 prerequisites = Array[String](["basic_gun"])
 mutually_exclusive = Array[String](["piercing_shots"])
 rarity = 2
 name = "Explosive Rounds"
 desc = "Projectiles explode on impact (cannot pierce)"
-is_ability = false

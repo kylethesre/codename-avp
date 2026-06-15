@@ -34,8 +34,7 @@ func _process(delta: float) -> void:
 	if not player: return
 	
 	# Wrap limits set to match the background repeat size (640 width -> 320 half-width)
-	var wrap_dist_x = 320.0
-	var wrap_dist_y = 320.0
+	var wrap_dist_x = 420.0
 	
 	var entities = get_tree().get_nodes_in_group("enemies") + get_tree().get_nodes_in_group("projectiles")
 	

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://cy3c1opljhx4v"]
+
+[ext_resource type="Script" uid="uid://cbaspi18oo6xg" path="res://scripts/Upgrade.gd" id="1_2breq"]
+[ext_resource type="PackedScene" uid="uid://b46wen7yvqxn6" path="res://scenes/abilities/basic_gun_1.tscn" id="1_w06uy"]
+
+[resource]
+script = ExtResource("1_2breq")
+id = "gun"
+ability = ExtResource("1_w06uy")
+name = "Gun"
+desc = "Automatically shoots nearby enemies every 1 second"
+is_ability = true
+metadata/_custom_type_script = "uid://cbaspi18oo6xg"

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://dq1oliuj7qhnv"]
 
-[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
-[ext_resource type="PackedScene" path="res://scenes/abilities/piercing_shots.tscn" id="2_ps"]
+[ext_resource type="Script" uid="uid://cbaspi18oo6xg" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://yjqagav3tw2v" path="res://scenes/abilities/piercing_shots.tscn" id="2_ps"]
 
 [resource]
 script = ExtResource("1")
@@ -10,8 +10,6 @@ ability = ExtResource("2_ps")
 weight = 70
 max_instances = 5
 prerequisites = Array[String](["basic_gun"])
-mutually_exclusive = Array[String]([])
 rarity = 1
 name = "Piercing Shots"
 desc = "+1 pierce to projectiles"
-is_ability = false

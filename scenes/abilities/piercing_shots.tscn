@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://piercing_shots_ability"]
-[ext_resource type="Script" path="res://scripts/piercing_shots.gd" id="1"]
-[node name="PiercingShots" type="Node"]
+[gd_scene format=3 uid="uid://yjqagav3tw2v"]
+
+[ext_resource type="Script" uid="uid://c7gnli5ftaym7" path="res://scripts/piercing_shots.gd" id="1"]
+
+[node name="PiercingShots" type="Node" unique_id=798528332]
 script = ExtResource("1")

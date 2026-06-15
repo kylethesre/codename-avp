@@ -48,8 +48,6 @@ func _on_body_entered(body: Node2D) -> void:
 			expl.global_position = global_position
 			expl.damage = damage
 			get_tree().current_scene.call_deferred("add_child", expl)
-			queue_free()
-			return
 			
 		if pierce_remaining > 0:
 			pierce_remaining -= 1
