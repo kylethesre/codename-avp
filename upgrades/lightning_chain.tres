@@ -11,5 +11,5 @@ prerequisites = Array[String](["lightning_strike"])
 mutually_exclusive = Array[String]([])
 rarity = 1
 name = "Chain Lightning"
-desc = "Lightning jumps to +1 enemy."
+desc = "(Lightning) Lightning jumps to +1 enemy."
 is_ability = false

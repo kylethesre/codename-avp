@@ -1,0 +1,7 @@
+extends Node
+func _ready():
+	var p = get_parent()
+	if p:
+		for c in p.get_children():
+			if c.name == 'OrbitalBlades' or c.has_method("set_radius"):
+				c.set_radius(c.radius + 40.0)

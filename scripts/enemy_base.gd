@@ -12,6 +12,10 @@ var player: Node2D = null
 var knockback_velocity = Vector2.ZERO
 @export var friction = 500.0
 
+var bleed_ticks_remaining: int = 0
+var bleed_damage_per_tick: float = 0.0
+var bleed_timer: Timer
+
 #Get reference for animated sprite
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -50,6 +54,11 @@ func _ready() -> void:
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
+		
+	bleed_timer = Timer.new()
+	bleed_timer.wait_time = 0.5
+	bleed_timer.timeout.connect(_on_bleed_tick)
+	add_child(bleed_timer)
 
 func _physics_process(_delta: float) -> void:
 	#if knockback
@@ -138,3 +147,21 @@ func take_damage(amount: float) -> void:
 		if player and player.has_signal("enemy_killed"):
 			player.enemy_killed.emit()
 		queue_free() # Enemy dies!
+
+func apply_bleed(duration: float, damage_per_tick: float) -> void:
+	# Tick every 0.5s
+	bleed_ticks_remaining = int(duration / 0.5)
+	bleed_damage_per_tick = damage_per_tick
+	if bleed_timer.is_stopped():
+		bleed_timer.start()
+
+func _on_bleed_tick() -> void:
+	if bleed_ticks_remaining > 0:
+		take_damage(bleed_damage_per_tick)
+		bleed_ticks_remaining -= 1
+		# Visual flash
+		animated_sprite.modulate = Color(1.0, 0.5, 0.5)
+		var tw = create_tween()
+		tw.tween_property(animated_sprite, "modulate", Color.WHITE, 0.2)
+	else:
+		bleed_timer.stop()

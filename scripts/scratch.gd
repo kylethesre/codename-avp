@@ -4,6 +4,9 @@ extends Node2D
 @export var cooldown: float = 1.5
 @export var range_dist: float = 100.0
 
+var causes_bleed: bool = false
+var is_vampiric: bool = false
+
 @onready var timer = $Timer
 @onready var hit_area = $HitArea
 @onready var sprite = $HitArea/AnimatedSprite2D
@@ -46,6 +49,12 @@ func _on_timeout():
 				body.take_damage(damage)
 				if body.has_method("apply_knockback"):
 					body.apply_knockback((body.global_position - global_position).normalized() * 200)
+				if causes_bleed and body.has_method("apply_bleed"):
+					body.apply_bleed(3.0, 5.0)
+				if is_vampiric and randf() < 0.2:
+					var players = get_tree().get_nodes_in_group("Player")
+					if players.size() > 0 and players[0].has_method("heal"):
+						players[0].heal(1)
 				
 		hit_area.monitoring = false
 		await tw.finished

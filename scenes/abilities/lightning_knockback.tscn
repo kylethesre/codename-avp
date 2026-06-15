@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://lightning_knockback_scene"]
+[ext_resource type="Script" path="res://scripts/lightning_knockback.gd" id="1"]
+[node name="LightningKnockback" type="Node"]
+script = ExtResource("1")

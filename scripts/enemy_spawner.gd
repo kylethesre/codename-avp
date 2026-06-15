@@ -56,15 +56,23 @@ func spawn_random_enemy() -> void:
 	# Loop through available_enemies and try to spawn each one based on its waves value(spawn chance)
 	for Enemy in available_enemies:
 		
-		#Does this enemy have data for the current wave?
-		if Enemy.stats.waves.size() < current_wave:
-			push_warning("Skipping " + Enemy.name + ": No wave data for wave " + str(current_wave))
-			continue # This skips to the next enemy in the loop!
+		var spawn_chance: float = 0.0
+		var max_defined_waves = Enemy.stats.waves.size()
+		
+		if max_defined_waves == 0:
+			continue
 			
-		var random_dice_roll: int = randi_range(1, 100)
+		if current_wave <= max_defined_waves:
+			spawn_chance = float(Enemy.stats.waves[current_wave-1])
+		else:
+			var base_chance = float(Enemy.stats.waves[max_defined_waves-1])
+			var waves_past = current_wave - max_defined_waves
+			spawn_chance = base_chance * pow(1.2, float(waves_past))
+			
+		var random_dice_roll: float = randf_range(1.0, 100.0)
 		# 2. Check if current selected enemy can be spawned.
 		# 2.5 Also slow spawning if there are too many enemies on the board.
-		if random_dice_roll <= Enemy.stats.waves[current_wave-1] && random_dice_roll <= curve_strength:
+		if random_dice_roll <= spawn_chance and random_dice_roll <= curve_strength:
 			
 			# 3. Duplicate it so we don't steal the original template
 			var enemy_instance = Enemy.duplicate() as Node2D

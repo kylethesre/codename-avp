@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://scratch_vampire_scene"]
+[ext_resource type="Script" path="res://scripts/scratch_vampire.gd" id="1"]
+[node name="ScratchVampire" type="Node"]
+script = ExtResource("1")

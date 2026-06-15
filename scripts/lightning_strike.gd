@@ -5,6 +5,10 @@ extends Node2D
 @export var radius: float = 40.0
 @export var chain_count: int = 0
 
+var double_strike: bool = false
+var has_knockback: bool = false
+var is_overloaded: bool = false
+
 @onready var timer = $Timer
 
 func _ready():
@@ -23,6 +27,9 @@ func _on_timeout():
 	
 	var target = valid[randi() % valid.size()]
 	_strike(target)
+	
+	if double_strike:
+		get_tree().create_timer(0.3).timeout.connect(func(): if is_instance_valid(target): _strike(target))
 	
 	var struck = [target]
 	
@@ -43,5 +50,6 @@ func _strike(target: Node2D):
 	var strike = preload("res://scenes/abilities/lightning_bolt.tscn").instantiate()
 	strike.global_position = target.global_position
 	strike.damage = damage
-	strike.radius = radius
+	strike.radius = radius * (1.5 if is_overloaded else 1.0)
+	strike.has_knockback = has_knockback
 	get_tree().current_scene.call_deferred("add_child", strike)

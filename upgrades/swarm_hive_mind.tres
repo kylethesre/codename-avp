@@ -11,5 +11,5 @@ prerequisites = Array[String](["swarm_drones"])
 mutually_exclusive = Array[String]([])
 rarity = 1
 name = "Hive Mind"
-desc = "+1 Drone per volley."
+desc = "(Drones) Adds +1 swarm drone."
 is_ability = false

@@ -13,5 +13,5 @@ prerequisites = Array[String](["double_shot"])
 mutually_exclusive = Array[String](["triple_shot"])
 rarity = 2
 name = "Spread Shot"
-desc = "Fire projectiles in a cone pattern (replaces triple shot path)"
+desc = "(Gun) Fire projectiles in a cone pattern (replaces triple shot path)"
 is_ability = false

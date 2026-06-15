@@ -5,6 +5,7 @@ extends Node2D
 @export var radius: float = 60.0
 @export var blade_count: int = 2
 
+var heavy_blades: bool = false
 var blades: Array = []
 var hit_cooldowns = {} 
 
@@ -48,10 +49,28 @@ func _physics_process(delta):
 		if not is_instance_valid(blades[i]): continue
 		var angle = i * angle_step
 		blades[i].position = Vector2(cos(angle), sin(angle)) * radius
-		blades[i].rotation = angle
+		blades[i].rotation = angle + (PI / 2.0)
 		
 		for body in blades[i].get_overlapping_bodies():
 			if not hit_cooldowns.has(body):
 				if body.has_method("take_damage"):
 					body.take_damage(damage)
 					hit_cooldowns[body] = 0.5
+					if heavy_blades:
+						for e in get_tree().get_nodes_in_group("enemies"):
+							if is_instance_valid(e) and e.has_method("apply_knockback"):
+								var dist = e.global_position.distance_to(blades[i].global_position)
+								if dist < 150.0:
+									var push_dir = (e.global_position - global_position).normalized()
+									var push_strength = 500.0 * (1.0 - (dist / 150.0))
+									e.apply_knockback(push_dir * push_strength)
+									
+		for area in blades[i].get_overlapping_areas():
+			if not hit_cooldowns.has(area):
+				if area.is_in_group("projectiles"):
+					hit_cooldowns[area] = 0.5
+					var away_dir = (area.global_position - global_position).normalized()
+					# randfn(mean, std_dev) creates a bell curve centered at 0 (away)
+					# with PI/1.8, most shots go away, but ~15-20% will deflect backwards towards the player
+					var random_angle = randfn(0.0, PI / 1.8)
+					area.rotation = away_dir.angle() + random_angle

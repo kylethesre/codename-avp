@@ -57,6 +57,11 @@ func take_damage(amount: int = 1, source_pos: Vector2 = Vector2.ZERO):
 		trigger_game_over()
 	# --- ADDED LOGIC END ---
 
+func heal(amount: int):
+	if health < max_health:
+		health = min(health + amount, max_health)
+		health_changed.emit(health, max_health)
+
 # --- ADDED FUNCTION AT THE BOTTOM ---
 func trigger_game_over():
 	var game_over_screen = get_tree().current_scene.get_node_or_null("GameOverMenu")

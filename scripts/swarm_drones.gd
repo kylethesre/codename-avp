@@ -5,6 +5,8 @@ extends Node2D
 @export var drone_speed: float = 200.0
 @export var damage: float = 20.0
 @export var leaves_acid: bool = false
+@export var is_explosive: bool = false
+@export var pierce_count: int = 0
 
 @onready var timer = $Timer
 
@@ -20,4 +22,6 @@ func _on_timeout():
 		drone.damage = damage
 		drone.speed = drone_speed
 		drone.leaves_acid = leaves_acid
+		drone.is_explosive = is_explosive
+		drone.pierce_count = pierce_count
 		get_tree().current_scene.call_deferred("add_child", drone)

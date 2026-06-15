@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://lightning_double_scene"]
+[ext_resource type="Script" path="res://scripts/lightning_double.gd" id="1"]
+[node name="LightningDouble" type="Node"]
+script = ExtResource("1")

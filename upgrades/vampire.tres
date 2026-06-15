@@ -13,5 +13,5 @@ prerequisites = Array[String]([])
 mutually_exclusive = Array[String]([])
 rarity = 2
 name = "Life Steal"
-desc = "1% chance per level to heal 1 HP on kill"
+desc = "(Passive) 1% chance per level to heal 1 HP on kill"
 is_ability = false

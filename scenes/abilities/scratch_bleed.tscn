@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://scratch_bleed_scene"]
+[ext_resource type="Script" path="res://scripts/scratch_bleed.gd" id="1"]
+[node name="ScratchBleed" type="Node"]
+script = ExtResource("1")

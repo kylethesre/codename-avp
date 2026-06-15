@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bw78pig260uqp"]
 
+[ext_resource type="FontFile" uid="uid://nij0romx0j7p" path="res://assets/PressStart2P-Regular.ttf" id="1_6ebp1"]
+
 [sub_resource type="GDScript" id="GDScript_tg6a4"]
 script/source = "extends CanvasLayer
 
@@ -30,6 +32,9 @@ func _on_restart_pressed() -> void:
 [sub_resource type="SystemFont" id="SystemFont_14ib6"]
 font_names = PackedStringArray("Fantasy")
 subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_cwb3k"]
+font = ExtResource("1_6ebp1")
 
 [node name="GameOverMenu" type="CanvasLayer" unique_id=766885458]
 script = SubResource("GDScript_tg6a4")
@@ -63,6 +68,7 @@ theme_override_colors/font_color = Color(0.8560673, 0.8560673, 0.85606724, 1)
 theme_override_fonts/font = SubResource("SystemFont_14ib6")
 theme_override_font_sizes/font_size = 38
 text = "GAME OVER"
+label_settings = SubResource("LabelSettings_cwb3k")
 horizontal_alignment = 1
 vertical_alignment = 1
 

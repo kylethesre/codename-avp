@@ -11,6 +11,7 @@ size = Vector2(11, 2)
 script = ExtResource("1_j7vux")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=98212834]
+modulate = Color(1, 0.23633331, 0.20999998, 1)
 scale = Vector2(0.335, 0.335)
 texture = ExtResource("2_j7vux")
 

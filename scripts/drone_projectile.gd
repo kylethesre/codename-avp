@@ -3,6 +3,9 @@ extends Area2D
 var damage: float = 20.0
 var speed: float = 200.0
 var leaves_acid: bool = false
+var is_explosive: bool = false
+var pierce_count: int = 0
+var hit_enemies: Array = []
 var target: Node2D = null
 
 func _ready():
@@ -37,6 +40,23 @@ func _find_target():
 				target = e
 
 func _on_body_entered(body):
-	if body.has_method("take_damage"):
+	if body.has_method("take_damage") and not body in hit_enemies:
 		body.take_damage(damage)
-		queue_free()
+		hit_enemies.append(body)
+		
+		if pierce_count > 0:
+			pierce_count -= 1
+		else:
+			_explode()
+
+func _explode():
+	if leaves_acid:
+		var acid = preload("res://scenes/abilities/acid_pool.tscn").instantiate()
+		acid.global_position = global_position
+		get_tree().current_scene.call_deferred("add_child", acid)
+	if is_explosive:
+		var boom = preload("res://scenes/explosion.tscn").instantiate()
+		boom.global_position = global_position
+		boom.damage = damage * 2.0
+		get_tree().current_scene.call_deferred("add_child", boom)
+	queue_free()

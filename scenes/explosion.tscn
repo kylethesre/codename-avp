@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://b4id3yexe7o5t"]
 [gd_scene format=3 uid="uid://d3maxga2gaodl"]
 
 [ext_resource type="Script" uid="uid://bho2csihju06t" path="res://scripts/explosion.gd" id="1_exp"]
-[ext_resource type="Texture2D" path="res://assets/epic_explosion_002_small_yellow/spritesheet.png" id="2_nfeox"]
-[ext_resource type="AudioStream" uid="uid://dxiok5ncwrql8" path="res://music/Sfx pack 4 free/Sfx pack 4 free/Explosion/Explosion3.wav" id="2_nfeox"]
+[ext_resource type="Texture2D" uid="uid://fpg8uxmsaqhe" path="res://assets/epic_explosion_002_small_yellow/spritesheet.png" id="2_nfeox"]
+[ext_resource type="AudioStream" uid="uid://cuo7ac1jp33nj" path="res://music/Sfx pack 4 free/Sfx pack 4 free/Explosion/Explosion.wav" id="3_aw4cw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_exp"]
 radius = 60.0
@@ -121,17 +120,18 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="Explosion" type="Area2D" unique_id=92152694]
+[node name="Explosion" type="Area2D" unique_id=512682316]
 script = ExtResource("1_exp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=526942531]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=864489919]
 shape = SubResource("CircleShape2D_exp")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1427637680]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1310257273]
 sprite_frames = SubResource("SpriteFrames_0j0nb")
 autoplay = "default"
-frame_progress = 0.0988613
+frame_progress = 0.9641774
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=824133574]
-stream = ExtResource("2_nfeox")
-autoplay = true
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1887094702]
+stream = ExtResource("3_aw4cw")
+volume_db = -10.0
+bus = &"SFX"

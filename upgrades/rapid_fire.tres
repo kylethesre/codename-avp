@@ -13,5 +13,5 @@ prerequisites = Array[String](["basic_gun"])
 mutually_exclusive = Array[String]([])
 rarity = 1
 name = "Rapid Fire"
-desc = "Increase fire rate by 30%"
+desc = "(Gun) Increase fire rate by 30%"
 is_ability = false

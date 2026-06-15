@@ -13,5 +13,5 @@ prerequisites = Array[String]([])
 mutually_exclusive = Array[String]([])
 rarity = 0
 name = "Health Up"
-desc = "Gain +1 max health"
+desc = "(Passive) Gain +1 max health"
 is_ability = false

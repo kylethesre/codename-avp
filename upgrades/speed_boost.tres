@@ -13,5 +13,5 @@ prerequisites = Array[String]([])
 mutually_exclusive = Array[String]([])
 rarity = 0
 name = "Swift Boots"
-desc = "Increase movement speed by 20%"
+desc = "(Passive) Increase movement speed by 20%"
 is_ability = false

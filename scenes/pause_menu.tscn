@@ -20,31 +20,56 @@ func toggle_pause():
 	
 	# Show or hide the menu based on the new state
 	visible = get_tree().paused
+	
+	if visible:
+		update_upgrades_list()
+
+func update_upgrades_list():
+	var list_container = $ColorRect/HBoxContainer/ScrollContainer/UpgradeList
+	if not list_container: return
+	
+	for child in list_container.get_children():
+		child.queue_free()
+		
+	var title = Label.new()
+	title.text = \"Acquired Upgrades:\"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	list_container.add_child(title)
+	
+	var mgr = null
+	var main = get_tree().current_scene
+	if main and main.has_node(\"UpgradeManager\"):
+		mgr = main.get_node(\"UpgradeManager\")
+	elif get_tree().root.has_node(\"UpgradeManager\"):
+		mgr = get_tree().root.get_node(\"UpgradeManager\")
+		
+	if not mgr: return
+	
+	var counts = {}
+	for u_id in mgr.obtained_upgrades:
+		if counts.has(u_id):
+			counts[u_id] += 1
+		else:
+			counts[u_id] = 1
+			
+	for u_id in counts.keys():
+		var display_name = u_id
+		for upg in mgr.all_upgrades:
+			if upg.id == u_id:
+				display_name = upg.name
+				break
+				
+		var amt = counts[u_id]
+		var l = Label.new()
+		if amt > 1:
+			l.text = \"- \" + display_name + \" x\" + str(amt)
+		else:
+			l.text = \"- \" + display_name
+		list_container.add_child(l)
 
 func _on_resume_button_pressed() -> void:
 	#Resume unpauses game
 	toggle_pause()
-
-
-func _on_quit_button_pressed() -> void:
-	#quit takes you back to main menu
-	get_tree().paused = false
-	#load main menu scene
-	get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
-
-
-func _on_volume_slider_value_changed(value: float) -> void:
-	#Find ID for main audio channel
-	var bus_index = AudioServer.get_bus_index(\"Master\")
-	#Convert 0-1 slider into decibels
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
-
-
-func _on_sfx_value_changed(value: float) -> void:
-	#Find ID for SFX audio channel
-	var bus_index = AudioServer.get_bus_index(\"SFX\")
-	#Convert 0-1 slider into decibels
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 "
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1214514540]
@@ -53,58 +78,69 @@ script = SubResource("GDScript_oofok")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1915447167]
 anchors_preset = -1
-offset_left = 416.0
-offset_top = 203.0
-offset_right = 800.0
-offset_bottom = 412.0
+offset_left = 300.0
+offset_top = 150.0
+offset_right = 900.0
+offset_bottom = 500.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.21176471, 0.25882354, 0.20784314, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=621446349]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect" unique_id=241477272]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -102.0
-offset_top = -55.0
-offset_right = 101.5
-offset_bottom = 58.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ResumeButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=802066554]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" unique_id=621446349]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer" unique_id=802066554]
 process_mode = 3
 layout_mode = 2
 text = "Resume"
 
-[node name="QuitButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1412577013]
+[node name="QuitButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer" unique_id=1412577013]
+process_mode = 3
 layout_mode = 2
 text = "Quit"
 
-[node name="Master Volume" type="Label" parent="ColorRect/VBoxContainer" unique_id=1095132623]
+[node name="Master Volume" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer" unique_id=1095132623]
 layout_mode = 2
 text = "Master Volume"
 
-[node name="VolumeSlider" type="HSlider" parent="ColorRect/VBoxContainer" unique_id=1923998071]
+[node name="VolumeSlider" type="HSlider" parent="ColorRect/HBoxContainer/VBoxContainer" unique_id=1923998071]
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="SFX Volume" type="Label" parent="ColorRect/VBoxContainer" unique_id=1822889295]
+[node name="SFX Volume" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer" unique_id=1822889295]
 layout_mode = 2
 text = "SFX Volume"
 
-[node name="SFX" type="HSlider" parent="ColorRect/VBoxContainer" unique_id=183202320]
+[node name="SFX" type="HSlider" parent="ColorRect/HBoxContainer/VBoxContainer" unique_id=183202320]
 layout_mode = 2
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[connection signal="pressed" from="ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="value_changed" from="ColorRect/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="value_changed" from="ColorRect/VBoxContainer/SFX" to="." method="_on_sfx_value_changed"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/HBoxContainer" unique_id=1088344921]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpgradeList" type="VBoxContainer" parent="ColorRect/HBoxContainer/ScrollContainer" unique_id=868837000]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="ColorRect/HBoxContainer/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="ColorRect/HBoxContainer/VBoxContainer/SFX" to="." method="_on_sfx_value_changed"]

@@ -93,19 +93,18 @@ script = ExtResource("1")
 shape = SubResource("CircleShape2D_1")
 
 [node name="BoltSprite" type="Sprite2D" parent="." unique_id=1021389940]
-visible = false
 modulate = Color(1, 1, 0, 1)
 position = Vector2(0, -150)
 texture = SubResource("PlaceholderTexture2D_bolt")
 
 [node name="ImpactSprite" type="Sprite2D" parent="." unique_id=1482282047]
-visible = false
 modulate = Color(1, 1, 0, 0.5)
 texture = SubResource("PlaceholderTexture2D_impact")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1106659335]
 stream = ExtResource("2_s0l21")
 autoplay = true
+bus = &"SFX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1099836623]
 sprite_frames = SubResource("SpriteFrames_s0wmh")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/drone_pierce.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "drone_pierce"
+ability = ExtResource("2")
+weight = 100
+max_instances = 1
+prerequisites = Array[String](["swarm_drones"])
+mutually_exclusive = Array[String]([])
+rarity = 1
+name = "Piercing Drones"
+desc = "(Drones) Drones fly right through the first enemy."
+is_ability = false

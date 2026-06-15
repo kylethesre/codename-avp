@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://orbital_speed_scene"]
+[ext_resource type="Script" path="res://scripts/orbital_speed.gd" id="1"]
+[node name="OrbitalSpeed" type="Node"]
+script = ExtResource("1")

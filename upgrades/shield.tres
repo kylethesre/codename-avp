@@ -11,4 +11,4 @@ weight = 50
 max_instances = 5
 rarity = 2
 name = "Dodge"
-desc = "+10% chance to dodge attacks (up to 50%)"
+desc = "(Passive) +10% chance to dodge attacks (up to 50%)"

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://drone_explosive_scene"]
+[ext_resource type="Script" path="res://scripts/drone_explosive.gd" id="1"]
+[node name="DroneExplosive" type="Node"]
+script = ExtResource("1")

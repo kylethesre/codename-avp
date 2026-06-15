@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/scratch_bleed.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "scratch_bleed"
+ability = ExtResource("2")
+weight = 100
+max_instances = 1
+prerequisites = Array[String](["scratch"])
+mutually_exclusive = Array[String]([])
+rarity = 1
+name = "Rending Claws"
+desc = "(Scratch) Scratch causes bleeding over time."
+is_ability = false

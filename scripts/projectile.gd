@@ -6,6 +6,7 @@ var damage: float = 10.0
 var speed: float = 400.0
 
 var is_explosive: bool = false
+var explosion_damage: float = 15.0
 var pierce_remaining: int = 0
 var fork_remaining: int = 0
 var hit_targets: Array[Node2D] = []
@@ -43,29 +44,31 @@ func _on_body_entered(body: Node2D) -> void:
 		hit_targets.append(body)
 		body.take_damage(damage)
 		
-		if is_explosive:
-			var expl = load("res://scenes/explosion.tscn").instantiate()
-			expl.global_position = global_position
-			expl.damage = damage
-			get_tree().current_scene.call_deferred("add_child", expl)
-			
 		if pierce_remaining > 0:
 			pierce_remaining -= 1
-		elif fork_remaining > 0:
-			fork_remaining -= 1
-			for angle in [-15, 15]:
-				var new_bullet = load(scene_file_path).instantiate()
-				new_bullet.global_position = global_position
-				new_bullet.global_rotation = global_rotation + deg_to_rad(angle)
-				new_bullet.damage = damage / 2.0
-				new_bullet.speed = speed
-				new_bullet.creator = creator
-				new_bullet.collision_mask = collision_mask
-				new_bullet.is_explosive = is_explosive
-				new_bullet.pierce_remaining = pierce_remaining
-				new_bullet.fork_remaining = fork_remaining
-				new_bullet.hit_targets = hit_targets.duplicate()
-				get_tree().current_scene.call_deferred("add_child", new_bullet)
-			queue_free()
 		else:
-			queue_free()
+			if is_explosive:
+				var expl = load("res://scenes/explosion.tscn").instantiate()
+				expl.global_position = global_position
+				expl.damage = explosion_damage
+				get_tree().current_scene.call_deferred("add_child", expl)
+				
+			if fork_remaining > 0:
+				fork_remaining -= 1
+				for angle in [-15, 15]:
+					var new_bullet = load(scene_file_path).instantiate()
+					new_bullet.global_position = global_position
+					new_bullet.global_rotation = global_rotation + deg_to_rad(angle)
+					new_bullet.damage = damage / 2.0
+					new_bullet.speed = speed
+					new_bullet.creator = creator
+					new_bullet.collision_mask = collision_mask
+					new_bullet.is_explosive = is_explosive
+					new_bullet.explosion_damage = explosion_damage / 2.0
+					new_bullet.pierce_remaining = pierce_remaining
+					new_bullet.fork_remaining = fork_remaining
+					new_bullet.hit_targets = hit_targets.duplicate()
+					get_tree().current_scene.call_deferred("add_child", new_bullet)
+				queue_free()
+			else:
+				queue_free()
