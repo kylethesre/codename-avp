@@ -11,6 +11,11 @@ func _ready() -> void:
 	if players.size() > 0:
 		player = players[0]
 		
+	# Force the music to loop just in case the import settings aren't sticking
+	var music_player = get_node_or_null("AudioStreamPlayer2D")
+	if music_player and music_player.stream and "loop" in music_player.stream:
+		music_player.stream.loop = true
+		
 	wave_text = get_tree().current_scene.find_child("Wave_text_counter", true)
 	if enemy_spawner.has_signal("wave_started"):
 		var wave_callable: Callable = Callable(self, "_on_wave_started")
