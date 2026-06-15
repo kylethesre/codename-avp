@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/lightning_strike.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "lightning_strike"
+ability = ExtResource("2")
+weight = 100
+max_instances = 1
+prerequisites = []
+mutually_exclusive = []
+rarity = 0
+name = "Lightning Strike"
+desc = "Calls down lightning on random enemies periodically."
+is_ability = true

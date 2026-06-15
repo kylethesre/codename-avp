@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/swarm_hive_mind.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "swarm_hive_mind"
+ability = ExtResource("2")
+weight = 100
+max_instances = 5
+prerequisites = ["swarm_drones"]
+mutually_exclusive = []
+rarity = 1
+name = "Hive Mind"
+desc = "+1 Drone per volley."
+is_ability = false

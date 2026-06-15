@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://lightning_chain_scene"]
+[ext_resource type="Script" path="res://scripts/lightning_chain.gd" id="1"]
+[node name="LightningChain" type="Node"]
+script = ExtResource("1")

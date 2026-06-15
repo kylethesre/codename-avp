@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/lightning_chain.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "lightning_chain"
+ability = ExtResource("2")
+weight = 100
+max_instances = 3
+prerequisites = ["lightning_strike"]
+mutually_exclusive = []
+rarity = 1
+name = "Chain Lightning"
+desc = "Lightning jumps to +1 enemy."
+is_ability = false
