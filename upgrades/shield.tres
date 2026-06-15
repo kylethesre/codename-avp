@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://bmwu1dg3jcrmd"]
 
-[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="Script" uid="uid://cbaspi18oo6xg" path="res://scripts/Upgrade.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/abilities/dodge.tscn" id="2_dodge"]
 
 [resource]
@@ -9,9 +9,6 @@ id = "dodge"
 ability = ExtResource("2_dodge")
 weight = 50
 max_instances = 5
-prerequisites = []
-mutually_exclusive = []
 rarity = 2
-name = "Dodge Roll"
+name = "Dodge"
 desc = "+10% chance to dodge attacks (up to 50%)"
-is_ability = false

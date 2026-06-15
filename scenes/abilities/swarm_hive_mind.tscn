@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://swarm_hive_mind_scene"]
+[ext_resource type="Script" path="res://scripts/swarm_hive_mind.gd" id="1"]
+[node name="SwarmHiveMind" type="Node"]
+script = ExtResource("1")

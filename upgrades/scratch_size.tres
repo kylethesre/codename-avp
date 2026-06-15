@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/scratch_size.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "scratch_size"
+ability = ExtResource("2")
+weight = 100
+max_instances = 3
+prerequisites = ["scratch"]
+mutually_exclusive = []
+rarity = 1
+name = "Wide Swipe"
+desc = "Scratch range +25."
+is_ability = false

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/Upgrade.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/abilities/orbital_blade_count.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "orbital_blade_count"
+ability = ExtResource("2")
+weight = 100
+max_instances = 4
+prerequisites = ["orbital_blades"]
+mutually_exclusive = []
+rarity = 1
+name = "More Blades"
+desc = "+1 Orbital Blade"
+is_ability = false

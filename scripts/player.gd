@@ -7,6 +7,11 @@ var dodge_chance: float = 0.0
 var health: int = 4
 @export var max_health: int = 4
 
+var is_dashing: bool = false
+var is_invincible: bool = false
+var dash_cooldown: float = 0.0
+var dash_speed: float = 600.0
+
 signal health_changed(health: int, max_health: int)
 signal enemy_killed
 
@@ -17,6 +22,9 @@ var is_hurt: bool = false
 const FloatingTextScene = preload("res://scenes/floating_text.tscn")
 
 func take_damage(amount: int = 1, source_pos: Vector2 = Vector2.ZERO):
+	if is_invincible:
+		return
+		
 	if randf() < dodge_chance:
 		# Dodge successful!
 		var ft = FloatingTextScene.instantiate()
@@ -62,9 +70,7 @@ func _ready() -> void:
 	health_changed.emit(health, max_health)
 
 func _input(event: InputEvent) -> void:
-	if event.get_action_strength("ui_accept"):
-		health -= 1
-		health_changed.emit(health, max_health)
+	pass
 
 func _physics_process(delta: float) -> void:
 	
@@ -80,6 +86,16 @@ func _physics_process(delta: float) -> void:
 	)
 	
 	var normalized_direction := direction_vector.normalized()
+	
+	if dash_cooldown > 0:
+		dash_cooldown -= delta
+		
+	if Input.is_action_just_pressed("ui_accept") and dash_cooldown <= 0 and direction_vector.length() > 0:
+		start_dash(normalized_direction)
+		
+	if is_dashing:
+		move_and_slide()
+		return
 	
 	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 500 * delta)
 	
@@ -103,6 +119,24 @@ func _physics_process(delta: float) -> void:
 			if $Timer.is_stopped():
 				take_damage(1, collision.get_collider().global_position)
 				$Timer.start()
+
+func start_dash(dir: Vector2) -> void:
+	is_dashing = true
+	is_invincible = true
+	dash_cooldown = 2.0
+	
+	# Knockback nearby enemies when starting the dash
+	trigger_radial_knockback()
+	
+	velocity = dir * dash_speed
+	
+	await get_tree().create_timer(0.2).timeout
+	is_dashing = false
+	velocity = Vector2.ZERO
+	
+	# Give a tiny bit of lingering i-frames after the dash ends
+	await get_tree().create_timer(0.1).timeout
+	is_invincible = false
 
 #Knockback feature
 func trigger_radial_knockback():

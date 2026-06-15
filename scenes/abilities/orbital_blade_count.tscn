@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://orbital_blade_count_scene"]
+[ext_resource type="Script" path="res://scripts/orbital_blade_count.gd" id="1"]
+[node name="OrbitalBladeCount" type="Node"]
+script = ExtResource("1")
