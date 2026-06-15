@@ -17,6 +17,13 @@ func _ready() -> void:
 
 func reset() -> void:
 	obtained_upgrades.clear()
+	if is_instance_valid(ui):
+		var p = ui.get_parent()
+		if p is CanvasLayer:
+			p.queue_free()
+		else:
+			ui.queue_free()
+		ui = null
 
 	# Find player node for applying upgrades
 	player = get_parent().get_node("CharacterBody2D") as Player
@@ -53,10 +60,12 @@ func load_all_upgrades() -> void:
 		dir.list_dir_begin()
 		var file_name: String = dir.get_next()
 		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var res = ResourceLoader.load(upgrades_path + "/" + file_name)
-				if res is Upgrade:
-					all_upgrades.append(res)
+			if not dir.current_is_dir():
+				var clean_name = file_name.trim_suffix(".remap")
+				if clean_name.ends_with(".tres") or clean_name.ends_with(".res"):
+					var res = ResourceLoader.load(upgrades_path + "/" + clean_name)
+					if res is Upgrade:
+						all_upgrades.append(res)
 			file_name = dir.get_next()
 		dir.list_dir_end()
 
