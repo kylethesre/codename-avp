@@ -3,8 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bq46cdiwnuxe5" path="res://scenes/background.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dtf5v77dx3dvt" path="res://scenes/character.tscn" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cv1vbvnynxjgt" path="res://assets/Willibab's Pixel Battle Backgrounds/Additions/Forest_01.png" id="2_p57ef"]
-[ext_resource type="Script" uid="uid://pl6hao6rio2q" path="res://scripts/basic_gun_1.gd" id="4_vtaks"]
-[ext_resource type="PackedScene" uid="uid://y5mhr07u28y3" path="res://scenes/projectile.tscn" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://cru0bg2j6kkxh" path="res://scripts/enemy_spawner.gd" id="6_p57ef"]
 [ext_resource type="AudioStream" uid="uid://gbxl2rg86qdl" path="res://music/xDeviruchi - 16 bit Fantasy & Adventure (2025)/xDeviruchi - 16 bit Fantasy & Adventure (2025)/mp3/04 - Silent Forest.mp3" id="6_vtaks"]
 [ext_resource type="PackedScene" uid="uid://by6tpmwv73i12" path="res://scenes/hud.tscn" id="7_gee14"]
@@ -12,9 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://cdrqql6g8e2bv" path="res://scenes/pause_menu.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cxtblputmevgr" path="res://scripts/game.gd" id="11_game"]
 [ext_resource type="PackedScene" uid="uid://bw78pig260uqp" path="res://scenes/game_over_menu.tscn" id="11_kvpfn"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
-radius = 160.00313
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 distance = -1.0
@@ -93,11 +88,12 @@ autostart = true
 
 [node name="Timer" type="Timer" parent="EnemySpawner" unique_id=74531]
 
+[node name="GameOverMenu" parent="." unique_id=766885458 instance=ExtResource("11_kvpfn")]
+visible = false
+
 [node name="HUD" parent="." unique_id=167591975 instance=ExtResource("7_gee14")]
 
 [node name="PauseMenu" parent="." unique_id=1214514540 instance=ExtResource("10_vtaks")]
-
-[node name="GameOverMenu" parent="." unique_id=766885458 instance=ExtResource("11_kvpfn")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1725142768]
 visible = false

@@ -76,6 +76,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ResumeButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=802066554]
+process_mode = 3
 layout_mode = 2
 text = "Resume"
 

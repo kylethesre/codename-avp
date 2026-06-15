@@ -5,17 +5,26 @@ script/source = "extends CanvasLayer
 
 func _ready() -> void:
 	hide() # Hide it by default
+	process_mode = Node.PROCESS_MODE_ALWAYS #forced start
 
 func show_game_over():
 	show()
-	get_tree().paused = true # Optional: pause the game
-
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	# Explicitly grab the button and clear any existing focus
+	var restart_button = get_node(\"RestartButton\") # Ensure this matches your button's name
+	if restart_button:
+		restart_button.release_focus()
+	
+	get_tree().paused = true
+	print(\"Game paused: \", get_tree().paused)
 
 
 func _on_restart_pressed() -> void:
-	print(\"Restart button clicked!\") # This will tell us if the button is working
-	get_tree().paused = false
-	get_tree().change_scene_to_file(\"res://scenes/game.tscn\") # level path
+# 1. Unpause the game so the tree can process the restart
+	get_tree().paused = false 
+	# 2. Reload the current scene
+	get_tree().reload_current_scene()
 "
 
 [sub_resource type="SystemFont" id="SystemFont_14ib6"]
