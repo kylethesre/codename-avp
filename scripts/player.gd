@@ -12,7 +12,7 @@ signal enemy_killed
 
 # Node references
 @onready var animated_sprite = $AnimatedSprite2D
-
+@onready var effect_sprite = $EffectSprite
 var is_hurt: bool = false
 const FloatingTextScene = preload("res://scenes/floating_text.tscn")
 
@@ -32,7 +32,9 @@ func take_damage(amount: int = 1, source_pos: Vector2 = Vector2.ZERO):
 	health_changed.emit(health, max_health)
 	#added for hurt animation
 	is_hurt = true
+	effect_sprite.show()
 	animated_sprite.play("Hurt")
+	effect_sprite.play("HitSpark")
 	await get_tree().create_timer(0.3).timeout # Adjust 0.3 to your animation length
 	is_hurt = false
 	
@@ -146,3 +148,4 @@ func _process(_delta):
 		animated_sprite.play("Run")
 	else:
 		animated_sprite.play("Idle")
+		
