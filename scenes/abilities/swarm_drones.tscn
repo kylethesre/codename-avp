@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://swarm_drones_scene"]
-[ext_resource type="Script" path="res://scripts/swarm_drones.gd" id="1"]
-[node name="SwarmDrones" type="Node2D"]
+[gd_scene format=3 uid="uid://svtsjnmcwnna"]
+
+[ext_resource type="Script" uid="uid://oijpbrbh6ll" path="res://scripts/swarm_drones.gd" id="1"]
+
+[node name="SwarmDrones" type="Node2D" unique_id=132317430]
 script = ExtResource("1")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=743259614]

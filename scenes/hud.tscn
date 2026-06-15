@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://u8bgwv7m8oa1" path="res://assets/ui/heart_animated_2.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://bwayg7vocn8og" path="res://scripts/heart_container.gd" id="1_oo0fn"]
 [ext_resource type="PackedScene" uid="uid://8hs7nq2ai5vi" path="res://scenes/heart.tscn" id="2_5ysmq"]
+[ext_resource type="Script" uid="uid://bcltrfdguovr4" path="res://scenes/wave_countdown_display.gd" id="4_6fi6k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oo0fn"]
 atlas = ExtResource("1_ahhtf")
@@ -40,15 +41,16 @@ texture = SubResource("AtlasTexture_oo0fn")
 unique_name_in_owner = true
 offset_left = 4.75
 offset_top = 22.25
-offset_right = 68.75
-offset_bottom = 40.75
+offset_right = 55.5
+offset_bottom = 37.0
 theme_override_font_sizes/normal_font_size = 10
 text = "Wave 1"
 
 [node name="Wave_countdown_display" type="RichTextLabel" parent="." unique_id=1180833806]
 offset_left = 5.75
 offset_top = 36.0
-offset_right = 87.5
-offset_bottom = 59.25
+offset_right = 47.25
+offset_bottom = 45.75
 theme_override_font_sizes/normal_font_size = 6
 text = "Next in: 60"
+script = ExtResource("4_6fi6k")
