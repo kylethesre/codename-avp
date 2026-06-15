@@ -1,12 +1,131 @@
-[gd_scene load_steps=3 format=3 uid="uid://explosion_scene"]
+[gd_scene format=3 uid="uid://b4id3yexe7o5t"]
 
-[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_exp"]
+[ext_resource type="Script" uid="uid://bho2csihju06t" path="res://scripts/explosion.gd" id="1_exp"]
+[ext_resource type="Texture2D" path="res://assets/epic_explosion_002_small_yellow/spritesheet.png" id="2_nfeox"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_exp"]
 radius = 60.0
 
-[node name="Explosion" type="Area2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw4cw"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3el85"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbmxj"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfoey"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8gpv"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cun36"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk406"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jttm"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6smmu"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l208b"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvsvq"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(960, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hpr0"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(1056, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcqkm"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(1152, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pw7mt"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(1248, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2c5d"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(1344, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0j0nb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw4cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3el85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbmxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfoey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8gpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cun36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk406")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jttm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6smmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l208b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvsvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hpr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcqkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pw7mt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2c5d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="Explosion" type="Area2D" unique_id=92152694]
 script = ExtResource("1_exp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=526942531]
 shape = SubResource("CircleShape2D_exp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1427637680]
+sprite_frames = SubResource("SpriteFrames_0j0nb")
+autoplay = "default"
+frame_progress = 0.0988613
